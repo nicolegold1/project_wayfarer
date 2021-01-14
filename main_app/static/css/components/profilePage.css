@@ -1,16 +1,52 @@
-.cardCityImage {
-  margin: 2%;
-  width: 190px;
+/* all */
+.profilePageContainer {
+  margin: 1%;
 }
 
+/* ========== Selected city side =============*/
+.selected_city {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.cardCityImage {
+  margin: 2%;
+  padding: 3%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.postsContainer {
+  margin: 1%;
+}
+
+/* User image */
 .cardPostImage {
   margin: 2%;
   border-radius: 10px 100px / 120px;
   width: 190px;
 }
 
+.cityname {
+  text-align: center;
+}
+
+#add-btn {
+  border-radius: 100%;
+  float: right;
+  margin: 1%;
+}
+
+/* ================ list item side ==================== */
 .cityListImage {
   margin: 2%;
-  width: 120px;
-  align-items: center;
+  object-fit: cover;
+  width: 100%;
 }

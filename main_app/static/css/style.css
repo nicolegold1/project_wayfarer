@@ -1,18 +1,54 @@
 /* profile page */
 @import "./components/profilePage.css";
 
+/* COLOR SCHEME */
+/* Dark Blue: #2b3752 */
+/* Light Blue/Greenish: #2e6e65 */
+/* Green: #86ee60 */
+/* Light Grey/Off White: #f4f7ed */
+
+html body {
+    background-color: #f4f7ed;
+}
+
+.navbar a {
+    color:#86ee60;
+}
 .carousel .carousel-item {
-  height: 450px !important;
+  height: 550px !important;
+  
 }
 
 .carousel-item img {
   display: block;
-  object-fit: contain;
+  object-fit: cover;
   top: 0;
   left: 0;
   min-height: 1000px;
+  transform: translateY(-50%);
 }
 
 .navbar {
   background-color: #2b3752;
 }
+
+.mainPageTitle {
+    display: flex;
+    justify-content: center;
+}
+
+.homePageMainRow {
+    padding-top: 1%;
+}
+
+/* Center aligned but check with client if they want left align */
+/* .homeCards {
+    text-align: center;
+} */ 
+
+
+
+
+
+
+

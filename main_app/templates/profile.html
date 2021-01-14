@@ -5,7 +5,41 @@
   integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
   crossorigin="anonymous"
 />
-{% endblock %} {% block content %}
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="postModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          ================================ Modal title
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        ================body of modal content================
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary">Post</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% block modalMainPage %} {% endblock %} {% endblock %} {% block content %}
 <div class="profilePageContainer">
   <div class="row">
     {% comment %} List item Column {% endcomment %}
@@ -71,11 +105,10 @@
 
     {% comment %} Selected city Column {% endcomment %}
     <div
-      class="col-8"
+      class="col-8 scrollspy-example"
       data-bs-spy="scroll"
       data-bs-target="#list-example"
       data-bs-offset="0"
-      class="scrollspy-example"
       tabindex="0"
     >
       <div class="selected_city">
@@ -105,7 +138,13 @@
             </div>
             <div class="col-6">
               {% comment %} button {% endcomment %}
-              <button type="button" class="btn btn-primary" id="add-btn">
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="add-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#postModal"
+              >
                 <i class="fas fa-plus"></i>
               </button>
             </div>
@@ -157,6 +196,7 @@
                   class="cardPostImage"
                   src="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
                   alt="..."
+                  style="float: right"
                 />
               </div>
             </div>

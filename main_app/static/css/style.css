@@ -1,7 +1,19 @@
 /* profile page */
 @import "./components/profilePage.css";
 
+/* COLOR SCHEME */
+/* Dark Blue: #2b3752 */
+/* Light Blue/Greenish: #2e6e65 */
+/* Green: #86ee60 */
+/* Light Grey/Off White: #f4f7ed */
 
+html body {
+    background-color: #f4f7ed;
+}
+
+.navbar a {
+    color:#86ee60;
+}
 .carousel .carousel-item {
   height: 550px !important;
   

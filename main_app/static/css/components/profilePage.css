@@ -27,6 +27,7 @@
 
 .postsContainer {
   margin: 1%;
+  max-height: 190px;
 }
 
 /* User image */
@@ -53,6 +54,19 @@
 }
 
 /* ================ list item side ==================== */
+.cityListRow {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #f4f7ed;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  height: 100vh;
+}
+
 .cityListImage {
   margin: 2%;
   object-fit: cover;

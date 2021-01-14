@@ -1,19 +1,134 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div class="profilePageContainer">
-      <div class="row">
-        {% comment %} First Column {% endcomment %}
-        <div class="col-4">
-          <h1 class="city_title">Cities</h1>
-          {% comment %} {% for ... in ... %} {% endcomment %}
-          <div class="card mb-3" style="max-width: 540px">
+{% extends 'base.html' %} {% block scripts %}
+<link
+  rel="stylesheet"
+  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+  crossorigin="anonymous"
+/>
+{% endblock %} {% block content %}
+<div class="profilePageContainer">
+  <div class="row">
+    {% comment %} List item Column {% endcomment %}
+    <div class="col-4 cityListRow">
+      <h1 class="city_title">Cities</h1>
+      {% comment %} {% for ... in ... %} {% endcomment %}
+      <div class="card mb-3" style="max-width: 540px">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              class="cityListImage"
+              src="https://i.pinimg.com/originals/1c/98/7e/1c987e01212b0675c26a317b84bcab42.jpg"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">London</h5>
+              <p class="card-text">
+                London is the capital and largest city of England and the United
+                Kingdom. The city stands on the River Thames in the south-east
+                of England, at the head of its 50-mile (80 km) estuary leading
+                to the North Sea.
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% comment %} {% endfor %} {% endcomment %}
+      <div class="card mb-3" style="max-width: 540px">
+        <div class="row g-0">
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">thailand</h5>
+              <p class="card-text">
+                Thailand is a Southeast Asian country. It's known for tropical
+                beaches, opulent royal palaces, ancient ruins and ornate temples
+                displaying figures of Buddha.
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="cityListImage"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_Thailand.svg/1200px-Flag_of_Thailand.svg.png"
+              alt="..."
+            />
+          </div>
+        </div>
+      </div>
+      {% comment %} end col {% endcomment %}
+    </div>
+
+    {% comment %} Selected city Column {% endcomment %}
+    <div class="col-8">
+      <div class="selected_city">
+        <div class="row">
+          <div class="col-6">
+            <div class="cityname">
+              <h1>london</h1>
+              <h2>United Kingdom</h2>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="cityimg">
+              <img
+                class="cardCityImage"
+                src="https://imageproxy.themaven.net//https%3A%2F%2Fwww.history.com%2F.image%2FMTYyNDg1MjE3MTI1Mjc5Mzk4%2Ftopic-london-gettyimages-760251843-promo.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="posts">
+          <div class="row">
+            <div class="col-6">
+              <h1>Posts</h1>
+            </div>
+            <div class="col-6">
+              {% comment %} button {% endcomment %}
+              <button type="button" class="btn btn-primary" id="add-btn">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          {% comment %} posts future for each {% endcomment %}
+          <div class="card mb-3 postsContainer">
             <div class="row g-0">
               <div class="col-md-4">
-                <img class="cityListImage" src="https://i.pinimg.com/originals/1c/98/7e/1c987e01212b0675c26a317b84bcab42.jpg" alt="..." />
+                <img
+                  class="cardPostImage"
+                  src="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
+                  alt="..."
+                />
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
+                  <h5 class="card-title">Sean Connery</h5>
+                  <p class="card-text">
+                    Sir Sean Connery (born Thomas Connery; 25 August 1930 – 31
+                    October 2020) was a Scottish actor. He became known as the
+                    first actor to portray fictional British secret agent James
+                    Bond on film.
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} even post {% endcomment %}
+          <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Victor Doyle</h5>
                   <p class="card-text">
                     This is a wider card with supporting text below as a natural
                     lead-in to additional content. This content is a little bit
@@ -24,66 +139,19 @@
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-          {% comment %} {% endfor %} {% endcomment %}
-          <a href="...Delete me"></a>
-          {% comment %} end col {% endcomment %}
-        </div>
-
-        {% comment %} new Column {% endcomment %}
-        <div class="col-8">
-        <div class="selected_city">
-          <div class="row">
-            <div class="col-6">
-            <div class="cityname">
-            <h1>london</h1>
-            <h2>United Kingdom</h2>
-            </div>
-            </div>
-            <div class="col-6">
-            <div class="cityimg">
-            <img class="cardCityImage" src="https://imageproxy.themaven.net//https%3A%2F%2Fwww.history.com%2F.image%2FMTYyNDg1MjE3MTI1Mjc5Mzk4%2Ftopic-london-gettyimages-760251843-promo.jpg" alt="">
-            </div>
-          </div>
-          </div>
-            <div class="posts">
-            <div class="row">
-            <div class="col-6">
-              <h1>Posts</h1>
-              </div>
-              <div class="col-6">
-              <button type="button" class="btn btn-primary" id="add-btn">+</button>
-              </div>
-              </div>
-              {% comment %} posts future for each {% endcomment %}
-              <div class="card mb-3 postsContainer" style="max-width: 540px">
-                <div class="row g-0">
-                  <div class="col-md-4">
-                    <img class="cardPostImage" src="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg" alt="..." />
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">
-                        This is a wider card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer.
-                      </p>
-                      <p class="card-text">
-                        <small class="text-muted"
-                          >Last updated 3 mins ago</small
-                        >
-                      </p>
-                    </div>
-                  </div>
-                </div>
+              <div class="col-md-4">
+                <img
+                  class="cardPostImage"
+                  src="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
+                  alt="..."
+                />
               </div>
             </div>
           </div>
-        </div>
-        {% comment %} end col {% endcomment %}
         </div>
       </div>
     </div>
+    {% comment %} end col {% endcomment %}
+  </div>
+</div>
 {% endblock %}

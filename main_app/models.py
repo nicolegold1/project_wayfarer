@@ -8,8 +8,18 @@ class Profile(models.Model):
 
 
 class City(models.Model):
+    name = models.CharField(max_length=20)
+    description = models.CharField(max_length=100)
     pass
 
 
 class Post(models.Model):
+    title = models.CharField(max_length=20)
+    field = models.CharField(max_length=100)
+    created_at = models.DateTimeField(False, True, editable=False)
+    updated_at = models.DateTimeField(True, True, editable=False)
+    user = models.ForeignKey(User)
     pass
+
+    class Meta:
+        ordering = ['-date']

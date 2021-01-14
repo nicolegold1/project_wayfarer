@@ -9,3 +9,6 @@ def profile(req):
 
 def homepage(request):
     return render(request, 'homepage.html')
+
+def posts(request):
+    return render(request, 'posts.html')

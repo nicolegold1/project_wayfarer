@@ -3,26 +3,24 @@ from django.shortcuts import render, redirect
 # Create your views here.
 
 
-def profile(req):
-    return render(req, 'profile.html')
-
-
 def homepage(request):
-     error_message = ''
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('wayfarer_index')
-        else:
-            error_message = 'Invalid sign up - try again'
-    # A GET or bad POST request, renders empty form
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
-    return render(request, 'homepage.html', context)
-
-  
+    return render(request, 'homepage.html')
 
 
-   
+def profile(req):
+    # if req.method == 'POST':
+    #     comment_form = AddComment_Form(req.POST)
+    #     if comment_form .is_valid():
+    #         new_comment = comment_form .save(commit=False)
+    #         new_comment.user = req.user
+    #         new_comment.save()
+    #         return redirect('profile')
+    # # Selected city
+    # selected_city = City.objects.filter(id=city_id)
+
+    # # all citys
+    # cities = SelectedCity.objects.all()
+
+    # comment_form = AddComment_Form()
+    # context = {'city': selected_city, 'cities': cities}
+    return render(req, 'profile.html')

@@ -1,16 +1,18 @@
-.carousel .carousel-item {
-    height: 450px !important;
-  }
-  
-  .carousel-item img {
-      display: block;
-      object-fit:contain;
-      top: 0;
-      left: 0;
-      min-height: 1000px;
-  }
+/* profile page */
+@import "./components/profilePage.css";
 
+.carousel .carousel-item {
+  height: 450px !important;
+}
+
+.carousel-item img {
+  display: block;
+  object-fit: contain;
+  top: 0;
+  left: 0;
+  min-height: 1000px;
+}
 
 .navbar {
-    background-color: #2b3752;
+  background-color: #2b3752;
 }

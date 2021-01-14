@@ -15,28 +15,36 @@
 </head>
 <body>
 {% comment %} left side nav bar {% endcomment %}
-<ul class="nav">
-  <li class="nav-item">
-    <a class="nav-link"  href="/">Wayfarer</a>
-  </li>
-</ul>
+<div class="navbar"> 
+  <div class="justify-content-start">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7L-3dOPJoBkg0990rBQIINGXaHEICWYCXoA&usqp=CAU" alt="" width="30" height="24" class="d-inline-block align-top">
+            Wayfarer
+          </a>
+      </div>
+  </div>
 {% comment %} right side nav bar {% endcomment %}
-<ul class="nav justify-content-end">
-{% comment %}  {% if user.is_authenticated %} {% endcomment %}
-  <li class="nav-item">
-    <a class="nav-link" href="#">Logout</a>
-  </li>
+      <div class="nav justify-content-end">
+      {% comment %}  {% if user.is_authenticated %} {% endcomment %}
+        <li class="nav-item ">
+          <a class="nav-link" href="#">Logout</a>
+        </li>
 
-{% comment %}  {% else %} {% endcomment %}
+      {% comment %}  {% else %} {% endcomment %}
 
-  <li class="nav-item">
-    <a class="nav-link" href="#">Sign In</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Sign Up</a>
-  </li>
-{% comment %}  {% endif %} {% endcomment %}
-</ul>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sign Up</a>
+        </li>
+      {% comment %}  {% endif %} {% endcomment %}
+      </div>
+</div>
+</nav>
+
+
 
 
 <!-- main content -->

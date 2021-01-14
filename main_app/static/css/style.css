@@ -3,8 +3,14 @@
   }
   
   .carousel-item img {
-      object-fit:cover;
+      display: block;
+      object-fit:contain;
       top: 0;
       left: 0;
-      min-height: 450px;
+      min-height: 1000px;
   }
+
+
+.navbar {
+    background-color: #2b3752;
+}

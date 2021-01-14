@@ -16,10 +16,11 @@ class City(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=20)
     field = models.CharField(max_length=100)
-    created_at = models.DateTimeField(False, True, editable=False)
-    updated_at = models.DateTimeField(True, True, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
     pass
 
-    class Meta:
-        ordering = ['-date']
+
+class Meta:
+    ordering = ['-date']

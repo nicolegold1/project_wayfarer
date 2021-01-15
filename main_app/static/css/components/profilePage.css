@@ -79,3 +79,7 @@
   object-fit: cover;
   width: 100%;
 }
+
+.user_information {
+  height: 46px;
+}

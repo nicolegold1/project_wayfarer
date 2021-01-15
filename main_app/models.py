@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user
+from django.contrib.auth.forms import UserChangeForm
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -17,7 +18,6 @@ class City(models.Model):
 class Profile(models.Model):
     joined = models.DateTimeField(auto_now_add=True)
     cities = models.ForeignKey(City, on_delete=models.CASCADE)
-
     # class FileType(paperclip.models.FileType):
     #     pass
 

@@ -26,32 +26,31 @@
   </div>
 {% comment %} right side nav bar {% endcomment %}
       <div class="nav justify-content-end">
-      {% comment %}  {% if user.is_authenticated %} {% endcomment %}
+      {% if user.is_authenticated %} 
         <li class="nav-item ">
-          <a class="nav-link" href="#">Logout</a>
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </li>
 
-      {% comment %}  {% else %} {% endcomment %}
+       {% else %} 
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Sign In</a>
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sign Up</a>
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a>
         </li>
-      {% comment %}  {% endif %} {% endcomment %}
+     {% endif %}
       </div>
 </div>
 </nav>
-
-
-
 
 <!-- main content -->
 <div class="mainContent">
 {% block mainPageContent %}
 {% endblock %}
 
+{% block modalMainPage %}
+{% endblock %}
 {% block content %}
 {% endblock %}
 </div>

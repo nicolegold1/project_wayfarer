@@ -64,7 +64,8 @@ def post(request):
     title = request.POST['title']
     content = request.POST['content']
     username_form = request.POST['username']
-
+    return redirect('posts')
+    
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)

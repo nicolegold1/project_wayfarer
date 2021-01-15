@@ -10,15 +10,27 @@
     <div class="card mb-3" style="max-width: 540px">
     {% comment %} List item Column {% endcomment %}
       {% comment %} {% for ... in ... %} {% endcomment %}
-      <form action="/posts/" method="post">
+      <form action="{% url 'posts' %}" method="post">
+        {% csrf_token %}
         <h1 class="city_title">Create a New Post</h1>
+        <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="1">Barcelona</option>
+              <option value="2">Berlin</option>
+              <option value="3">London</option>
+              <option value="4">New York</option>
+              <option value="5">Paris</option>
+              <option value="6">San Francisco</option>
+              
+            </select>
+        </div>
         <label for="title">Title</label>
         <br>
-        <input id="title" type="text" name="name_field">
+        <input id="title" type="text" name="name_field" required>
         <br>
         <br>
         <label for="comment"></label>
-        <input id="comment" type="text" value="Insert comment">
+        <input id="comment" type="text" required>
         <br>
         <br>
         <input type="submit" value="Submit">

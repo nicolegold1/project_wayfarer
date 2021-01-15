@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-
+from django.views.generic.edit import UpdateView
 
 # Create your views here.
 
@@ -71,3 +71,20 @@ def post_create(request):
         if form.is_valid():
             post = form.save()
             return redirect('profile')
+
+
+class EditUserProfileView(UpdateView):
+    model = Profile
+    form_class = UserProfileForm
+    template_name = "profiles/user_profile.html"
+
+def get_object(self, *args, **kwargs):
+        user = get_object_or_404(User, pk=self.kwargs['pk'])
+
+        # We can also get user object using self.request.user  but that doesnt work
+        # for other models.
+
+        return user.userprofile
+
+def get_success_url(self, *args, **kwargs):
+        return reverse("some url name")

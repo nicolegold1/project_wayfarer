@@ -16,7 +16,7 @@ def homepage(request):
                 user = form.save()
                 login(request, user)
                 return redirect('profile')
-            else: 
+            else:
                 error_message = "Invalid Sign Up - Please Try Again"
         elif request.POST.get('submit') == 'sign_in':
             username = request.POST.get('username')

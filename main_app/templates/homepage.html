@@ -30,40 +30,52 @@
   {% endblock %}
 
 {% block modalMainPage %}
-{% comment %} modal here {% endcomment %}
 <!--- The modal Trigger/Button is on the base.html -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% comment %} Login Modal {% endcomment %}
+<div class="modal fade" id="loginModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+          <div class="modal-body">
+        <form method="POST" action='{% url 'login' %}'>{% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" name="username" value="" id="username"><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="" id="password"><br>
+        
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-primary" value="Login"/>
+          <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+            {% comment %} FIXME: not working if login is wrong {% endcomment %}
+          {% if form.errors %}
+          <p>Your username and password didn't match. Please try again.</p>
+          {% endif %}
+        </div>
+           
+          
+        </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% comment %} Sign up Modal  {% endcomment %}
+<div class="modal fade" id="signupModal" tabindex="-1" >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
       </div>
       <div class="modal-body">
-       hello im signing up
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
     </div>
   </div>
@@ -86,7 +98,7 @@
   <div class="col-4"> 
         <div class="mx-auto" style="width: 23rem;">
             <h2 class="card-title homeCards">Freedom To Explore</h2>
-            <p class="card-text homeCards">We curate your memories and thoughts all within a beautifully kept application, for you to revisit some of your favorite memories of your favorite places. All in the ease of a click.</p>
+            <p class="card-text homeCards">We curate your memories and thoughts all within a beautifully kept application, for you to revisit some of your favorite memories of your favorite places.</p>
          
         </div>
   </div>

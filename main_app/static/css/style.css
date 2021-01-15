@@ -41,14 +41,22 @@ html body {
     padding-top: 1%;
 }
 
+#postCard {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+#comment {
+  height:200px;
+  width: 100%;
+}
+
+.titleDiv {
+  padding: 10px;
+}
 /* Center aligned but check with client if they want left align */
 /* .homeCards {
     text-align: center;
 } */ 
-
-
-
-
-
-
-

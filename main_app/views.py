@@ -10,14 +10,23 @@ from django.http import HttpResponse
 def homepage(request):
     error_message = ''
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('profile')
-        else:
-            error_message = "Invalid Sign Up - Please Try Again"
-
+        if request.POST.get('submit') == 'sign_up':
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                return redirect('profile')
+            else:
+                error_message = "Invalid Sign Up - Please Try Again"
+        elif request.POST.get('submit') == 'sign_in':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('profile')
+            else:
+                error_message = "Invalid Sign In Credentials - Please Try Again"
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'homepage.html', context)

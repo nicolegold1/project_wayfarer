@@ -14,16 +14,16 @@ class Profile(models.Model):
     joined = models.DateTimeField(auto_now_add=True)
     cities = models.ForeignKey(City, on_delete=models.CASCADE)
 
-    class FileType(paperclip.models.FileType):
-        pass
+    # class FileType(paperclip.models.FileType):
+    #     pass
 
-    class Attachment(paperclip.models.Attachment):
-        pass
+    # class Attachment(paperclip.models.Attachment):
+    #     pass
 
 
 class Post(models.Model):
     title = models.CharField(max_length=20)
-    description = models.TextFieldCharField(max_length=100)
+    description = models.TextField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -140,6 +140,7 @@
             </div>
           </div>
           {% comment %} posts future for each {% endcomment %}
+          <a class="cardATag" href="{% url 'posts/post_id' %}"> 
           <div class="card mb-3 postsContainer">
             <div class="row g-0">
               <div class="col-md-4">
@@ -152,19 +153,20 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">Sean Connery</h5>
+                    <p class="card-text">
+                      Sir Sean Connery (born Thomas Connery; 25 August 1930 – 31
+                      October 2020) was a Scottish actor. He became known as the
+                      first actor to portray fictional British secret agent James
+                      Bond on film.
+                    </p>
                   <p class="card-text">
-                    Sir Sean Connery (born Thomas Connery; 25 August 1930 – 31
-                    October 2020) was a Scottish actor. He became known as the
-                    first actor to portray fictional British secret agent James
-                    Bond on film.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                    <small class="text-muted">Last updated {% comment %} add dateTime here {% endcomment %}3 mins ago</small>
                   </p>
                 </div>
               </div>
             </div>
           </div>
+          </a>
           {% comment %} even post {% endcomment %}
           <div class="card mb-3">
             <div class="row g-0">

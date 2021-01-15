@@ -1,3 +1,9 @@
+/* no ahref styling */
+
+a {
+  text-decoration: none;
+}
+
 /* all */
 :root {
   --main-color: #f4f7ed;
@@ -73,6 +79,7 @@
   border-radius: 0.25rem;
   height: 100vh;
 }
+
 
 .cityListImage {
   margin: 2%;

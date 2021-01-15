@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
+from .models import Post
 
 # Create your views here.
 
@@ -71,4 +72,10 @@ def post_create(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save()
-            return redirect('profile')
+    return redirect('profile')
+
+def posts_detail(request, post_id):
+    post = Post.objects.get(id=post_id)
+    context = {'post': post}
+    return render(request,'post.html', context)
+

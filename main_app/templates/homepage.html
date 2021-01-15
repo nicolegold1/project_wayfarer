@@ -39,20 +39,20 @@
         <h5 class="modal-title" id="exampleModalLabel">Login</h5>
       </div>
           <div class="modal-body">
-        <form method="POST" action='{% url 'login' %}'>{% csrf_token %}
+          {% if form.errors %}
+          <p>Your username and password didn't match. Please try again.</p>
+          {% endif %}
+        <form method="POST">{% csrf_token %}
             <label for="username">Username:</label>
             <input type="text" name="username" value="" id="username"><br>
             <label for="password">Password:</label>
             <input type="password" name="password" value="" id="password"><br>
         
         <div class="modal-footer">
-          <input type="submit" class="btn btn-primary" value="Login"/>
+          <input type="submit" class="btn btn-primary" name="submit" value="sign_in"/>
           <input type="hidden" name="next" value="{{ next }}" />
             </form>
             {% comment %} FIXME: not working if login is wrong {% endcomment %}
-          {% if form.errors %}
-          <p>Your username and password didn't match. Please try again.</p>
-          {% endif %}
         </div>
            
           
@@ -74,7 +74,8 @@
             {{ form.as_p }}
       </div>
       <div class="modal-footer">
-        <button type="button submit" class="btn btn-primary">Submit</button>
+        <input type="submit" class="btn btn-primary" name="submit" value="sign_up"/>
+          <input type="hidden" name="next" value="{{ next }}" />
         </form>
       </div>
     </div>

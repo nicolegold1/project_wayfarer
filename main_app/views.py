@@ -22,25 +22,12 @@ def homepage(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'homepage.html', context)
     
-""" 
-def login(request):  
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('profile')
-        else:
-            return HttpResponse("TEST. Please try again.") 
-    return render(request, "registration/login.html", {'next':'/profile'})
- """
 def logout(request):
     logout(request)
     return redirect('homepage')
 
 
-
+@login_required(login_url='homepage')
 def profile(req):
     # if req.method == 'POST':
     #     comment_form = AddComment_Form(req.POST)

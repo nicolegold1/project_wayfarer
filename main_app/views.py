@@ -3,10 +3,10 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-
-from .models import Post
+from .models import City, Profile, Post
 
 # Create your views here.
+
 
 def homepage(request):
     error_message = ''
@@ -40,6 +40,10 @@ def logout(request):
 
 @login_required(login_url='homepage')
 def profile(req):
+    # all citys
+    cities = City.objects.all()
+    context = {'cities': cities}
+    return render(req, 'profile.html', context)
     # if req.method == 'POST':
     #     comment_form = AddComment_Form(req.POST)
     #     if comment_form .is_valid():
@@ -47,18 +51,17 @@ def profile(req):
     #         new_comment.user = req.user
     #         new_comment.save()
     #         return redirect('profile')
-    # # Selected city
+    # Selected city
     # selected_city = City.objects.filter(id=city_id)
 
-    # # all citys
-    # cities = SelectedCity.objects.all()
 
+# 'city': selected_city,
     # comment_form = AddComment_Form()
-    # context = {'city': selected_city, 'cities': cities}
-    return render(req, 'profile.html')
+
 
 def posts(request):
     return render(request, 'posts.html')
+
 
 def post(request):
   if request.method == "POST":

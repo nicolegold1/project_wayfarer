@@ -90,3 +90,15 @@ a {
 .user_information {
   height: 46px;
 }
+
+.user {
+  float: right;
+  text-align: right;
+}
+.username {
+  margin: 0 auto;
+}
+
+.userlogin {
+  margin: 0 auto;
+}

@@ -55,3 +55,19 @@ def profile(req):
     # comment_form = AddComment_Form()
     # context = {'city': selected_city, 'cities': cities}
     return render(req, 'profile.html')
+
+def posts(request):
+    return render(request, 'posts.html')
+
+def post(request):
+  if request.method == "POST":
+    title = request.POST['title']
+    content = request.POST['content']
+    username_form = request.POST['username']
+
+def post_create(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            return redirect('profile')

@@ -7,7 +7,7 @@
 />
 {% endblock %} {% block content %}
 <div class="profilePageContainer">
-    <div class="card mb-3" style="max-width: 540px">
+    <div class="card mb-3" id="postCard" style="max-width: 540px">
     {% comment %} List item Column {% endcomment %}
       {% comment %} {% for ... in ... %} {% endcomment %}
       <form action="{% url 'posts' %}" method="post">
@@ -24,19 +24,18 @@
               
             </select>
         </div>
+        <div class="titleDiv">
         <label for="title">Title</label>
         <br>
-        <input id="title" type="text" name="name_field" required>
-        <br>
-        <br>
-        <label for="comment"></label>
-        <input id="comment" type="text" required>
-        <br>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-          </div>
+            <input id="title" type="text" name="name_field" required>
         </div>
-      </div>
+            <label for="comment"></label>
+            <input id="comment" type="text" required>
+            <br>
+            <input type="submit" value="Submit">
+    </form>
+    </div>
+  </div>
+</div>
       
 {% endblock %}

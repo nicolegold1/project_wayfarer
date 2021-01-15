@@ -1,10 +1,44 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+
 
 # Create your views here.
 
-
 def homepage(request):
-    return render(request, 'homepage.html')
+    error_message = ''
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('profile')
+        else: 
+            error_message = "Invalid Sign Up - Please Try Again"
+
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'homepage.html', context)
+    
+""" 
+def login(request):  
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('profile')
+        else:
+            return HttpResponse("TEST. Please try again.") 
+    return render(request, "registration/login.html", {'next':'/profile'})
+ """
+def logout(request):
+    logout(request)
+    return redirect('homepage')
+
 
 
 def profile(req):

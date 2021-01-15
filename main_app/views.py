@@ -15,13 +15,14 @@ def homepage(request):
             user = form.save()
             login(request, user)
             return redirect('profile')
-        else: 
+        else:
             error_message = "Invalid Sign Up - Please Try Again"
 
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'homepage.html', context)
-    
+
+
 def logout(request):
     logout(request)
     return redirect('homepage')

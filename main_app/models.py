@@ -4,12 +4,24 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    pass
 
 
 class City(models.Model):
+    # name = models.CharField(max_length=20)
+    # description = models.CharField(max_length=100)
     pass
 
 
 class Post(models.Model):
+    # title = models.CharField(max_length=20)
+    # field = models.CharField(max_length=100)
+    # created_at = models.DateTimeField(auto_now_add=True)
+    # updated_at = models.DateTimeField(auto_now=True)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     pass
+
+    # class Meta:
+    #     ordering = ['-date']
+    #     pass

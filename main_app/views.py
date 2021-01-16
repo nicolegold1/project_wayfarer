@@ -66,12 +66,14 @@ def profile(req):
     # comment_form = AddComment_Form()
 
 
-# def post(request):
-#     if request.method == "POST":
-#         title = request.POST['title']
-#         content = request.POST['content']
-#         username_form = request.POST['username']
-#     return redirect('posts')
+def post(req, post_id):
+    post = Post.objects.get(id=post_id)
+    # if request.method == "POST":
+    #     title = request.POST['title']
+    #     content = request.POST['content']
+    #     username_form = request.POST['username']
+    context = {'post': post}
+    return render(req, 'post.html', context)
 
 
 def post(request):

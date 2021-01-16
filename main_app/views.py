@@ -3,9 +3,14 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+<<<<<<< HEAD
 from django.views.generic.edit import UpdateView
+=======
+from .models import City, Profile, Post
+>>>>>>> origin/submaster
 
 # Create your views here.
+
 
 def homepage(request):
     error_message = ''
@@ -16,7 +21,7 @@ def homepage(request):
                 user = form.save()
                 login(request, user)
                 return redirect('profile')
-            else: 
+            else:
                 error_message = "Invalid Sign Up - Please Try Again"
         elif request.POST.get('submit') == 'sign_in':
             username = request.POST.get('username')
@@ -39,6 +44,10 @@ def logout(request):
 
 @login_required(login_url='homepage')
 def profile(req):
+    # all citys
+    cities = City.objects.all()
+    context = {'cities': cities}
+    return render(req, 'profile.html', context)
     # if req.method == 'POST':
     #     comment_form = AddComment_Form(req.POST)
     #     if comment_form .is_valid():
@@ -46,31 +55,32 @@ def profile(req):
     #         new_comment.user = req.user
     #         new_comment.save()
     #         return redirect('profile')
-    # # Selected city
+    # Selected city
     # selected_city = City.objects.filter(id=city_id)
 
-    # # all citys
-    # cities = SelectedCity.objects.all()
 
+# 'city': selected_city,
     # comment_form = AddComment_Form()
-    # context = {'city': selected_city, 'cities': cities}
-    return render(req, 'profile.html')
+
 
 def posts(request):
     return render(request, 'posts.html')
+
 
 def post(request):
   if request.method == "POST":
     title = request.POST['title']
     content = request.POST['content']
     username_form = request.POST['username']
-
+    return redirect('posts')
+    
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save()
             return redirect('profile')
+
 
 
 class EditUserProfileView(UpdateView):
@@ -88,3 +98,4 @@ def get_object(self, *args, **kwargs):
 
 def get_success_url(self, *args, **kwargs):
         return reverse("some url name")
+

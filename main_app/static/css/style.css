@@ -11,6 +11,11 @@ html body {
     background-color: #f4f7ed;
 }
 
+.cardATag {
+  text-decoration: none;
+  color: inherit;
+}
+
 .navbar a {
     color:#86ee60;
 }

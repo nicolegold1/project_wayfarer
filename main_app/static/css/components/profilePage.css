@@ -1,3 +1,9 @@
+/* no ahref styling */
+
+a {
+  text-decoration: none;
+}
+
 /* all */
 :root {
   --main-color: #f4f7ed;
@@ -74,8 +80,25 @@
   height: 100vh;
 }
 
+
 .cityListImage {
   margin: 2%;
   object-fit: cover;
   width: 100%;
+}
+
+.user_information {
+  height: 46px;
+}
+
+.user {
+  float: right;
+  text-align: right;
+}
+.username {
+  margin: 0 auto;
+}
+
+.userlogin {
+  margin: 0 auto;
 }

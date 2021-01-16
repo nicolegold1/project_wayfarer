@@ -1,43 +1,58 @@
 {% extends 'base.html' %} {% block scripts %}
 <link
-  rel="stylesheet"
-  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-  crossorigin="anonymous"
+        rel="stylesheet"
+        href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+        crossorigin="anonymous"
 />
 
 <!-- Modal -->
 <div
-  class="modal fade"
-  id="postModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
+        class="modal fade"
+        id="postModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
 >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          ================================ Modal title
+          <h1 class="city_title">Create a New Post</h1>
         </h5>
         <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
         ></button>
       </div>
+      {% comment %} modal {% endcomment %}
       <div class="modal-body">
-        ================body of modal content================
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cancel
-        </button>
-        <button type="button" class="btn btn-primary">Post</button>
+        <div class="profilePageContainer">
+          <div class="card mb-3" id="postCard" style="max-width: 540px">
+            <form action="{% url 'profile' %}" method="POST">
+              <div class="titleDiv form-group">
+              </div>
+              {% csrf_token %}
+              {{ post_form.as_p }}
+              <div class="modal-footer" style="justify-content: center;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+                <input type="hidden" name="next" value="{{ next }}" />
+              </div>
+            </form>
+        </div>
       </div>
     </div>
   </div>
+  {% comment %} end of modal body {% endcomment %}
+
+</div>
+</div>
+</div>
 </div>
 {% block modalMainPage %} {% endblock %} {% endblock %} {% block content %}
 <div class="profilePageContainer">
@@ -45,7 +60,7 @@
     {% comment %} List item Column {% endcomment %}
     <div class="col-4 cityListRow">
       <h1 class="city_title">Cities</h1>
-      {% for city in cities %} {% if city.id|divisibleby:2 %}
+      {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
       <div class="card mb-3" style="max-width: 540px">
         <a class="list-group-item list-group-item-action" href="#list-item-1">
           <div class="row g-0">
@@ -88,11 +103,11 @@
 
     {% comment %} Selected city Column {% endcomment %}
     <div
-      class="col-8 scrollspy-example"
-      data-bs-spy="scroll"
-      data-bs-target="#list-example"
-      data-bs-offset="0"
-      tabindex="0"
+            class="col-8 scrollspy-example"
+            data-bs-spy="scroll"
+            data-bs-target="#list-example"
+            data-bs-offset="0"
+            tabindex="0"
     >
       <div class="selected_city">
         <div class="row">
@@ -109,14 +124,16 @@
               {% comment %} userinformation {% endcomment %}
               <div class="user">
                 <p class="username">{{user.username}}</p>
-                <p class="userlogin">{{user.date_joined}}</p>
+                <p class="userlogin text-muted">
+                  Joined: {{user.date_joined.month}}, {{user.date_joined.year}}
+                </p>
               </div>
             </div>
             <div class="cityimg">
               <img
-                class="cardCityImage"
-                src="https://imageproxy.themaven.net//https%3A%2F%2Fwww.history.com%2F.image%2FMTYyNDg1MjE3MTI1Mjc5Mzk4%2Ftopic-london-gettyimages-760251843-promo.jpg"
-                alt=""
+                      class="cardCityImage"
+                      src="https://imageproxy.themaven.net//https%3A%2F%2Fwww.history.com%2F.image%2FMTYyNDg1MjE3MTI1Mjc5Mzk4%2Ftopic-london-gettyimages-760251843-promo.jpg"
+                      alt=""
               />
             </div>
           </div>
@@ -129,71 +146,75 @@
             <div class="col-6">
               {% comment %} button {% endcomment %}
               <button
-                type="button"
-                class="btn btn-primary"
-                id="add-btn"
-                data-bs-toggle="modal"
-                data-bs-target="#postModal"
+                      type="button"
+                      class="btn btn-primary"
+                      id="add-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#postModal"
               >
                 <i class="fas fa-plus"></i>
               </button>
             </div>
           </div>
-          {% comment %} posts future for each {% endcomment %}
-          <a class="cardATag" href="{% url 'posts/post_id' %}"> 
-          <div class="card mb-3 postsContainer">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img
-                  class="cardPostImage"
-                  src="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
-                  alt="..."
-                />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Sean Connery</h5>
+          {% for post in posts %} {% if forloop.counter|divisibleby:2 %}
+          {% comment %}
+          <a class="cardATag" href="{% url 'posts/post_id' %}">
+            {% endcomment %}
+            <div class="card mb-3 postsContainer">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                          class="cardPostImage"
+                          src="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
+                          alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Sean Connery</h5>
                     <p class="card-text">
                       Sir Sean Connery (born Thomas Connery; 25 August 1930 – 31
                       October 2020) was a Scottish actor. He became known as the
-                      first actor to portray fictional British secret agent James
-                      Bond on film.
+                      first actor to portray fictional British secret agent
+                      James Bond on film.
                     </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated {% comment %} add dateTime here {% endcomment %}3 mins ago</small>
-                  </p>
+                    <p class="card-text">
+                      <small class="text-muted"
+                      >Last updated add dateTime here 3 mins ago</small
+                      >
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          </a>
-          {% comment %} even post {% endcomment %}
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Victor Doyle</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
+            {% else %}
+            <div class="card mb-3">
+              <div class="row g-0">
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Victor Doyle</h5>
+                    <p class="card-text">
+                      This is a wider card with supporting text below as a natural
+                      lead-in to additional content. This content is a little bit
+                      longer.
+                    </p>
+                    <p class="card-text">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <img
+                          class="cardPostImage"
+                          src="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
+                          alt="..."
+                          style="float: right"
+                  />
                 </div>
               </div>
-              <div class="col-md-4">
-                <img
-                  class="cardPostImage"
-                  src="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
-                  alt="..."
-                  style="float: right"
-                />
-              </div>
             </div>
-          </div>
         </div>
+        {% endif %} {% endfor %}
       </div>
     </div>
     {% comment %} end col {% endcomment %}

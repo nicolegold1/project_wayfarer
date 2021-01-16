@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import City, Profile, Post
+from .forms import Post_Form
 
 # Create your views here.
 
@@ -40,17 +41,20 @@ def logout(request):
 
 @login_required(login_url='homepage')
 def profile(req):
+    if req.method == 'POST':
+        form = Post_Form(req.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.user = req.user
+            new_post.save()
+            return redirect('profile')
     # all citys
     cities = City.objects.all()
-    context = {'cities': cities}
+    # posts
+    posts = Post.objects.all()
+    post_form = Post_Form()
+    context = {'cities': cities, 'posts': posts, 'post_form': post_form}
     return render(req, 'profile.html', context)
-    # if req.method == 'POST':
-    #     comment_form = AddComment_Form(req.POST)
-    #     if comment_form .is_valid():
-    #         new_comment = comment_form .save(commit=False)
-    #         new_comment.user = req.user
-    #         new_comment.save()
-    #         return redirect('profile')
     # Selected city
     # selected_city = City.objects.filter(id=city_id)
 
@@ -59,20 +63,17 @@ def profile(req):
     # comment_form = AddComment_Form()
 
 
-def posts(request):
-    return render(request, 'posts.html')
+# def post(request):
+#     if request.method == "POST":
+#         title = request.POST['title']
+#         content = request.POST['content']
+#         username_form = request.POST['username']
+#     return redirect('posts')
 
 
-def post(request):
-  if request.method == "POST":
-    title = request.POST['title']
-    content = request.POST['content']
-    username_form = request.POST['username']
-    return redirect('posts')
-    
-def post_create(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save()
-            return redirect('profile')
+# def post_create(request):
+#     if request.method == 'POST':
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             post = form.save()
+#             return redirect('profile')

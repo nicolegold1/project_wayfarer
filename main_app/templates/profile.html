@@ -156,8 +156,8 @@
               </button>
             </div>
           </div>
-          {% for posts in cities %} 
-          {% comment %} {% if forloop.counter|divisibleby:2 %} {% endcomment %}
+          {% for posts in posts %} 
+          {% if forloop.counter|divisibleby:2 %}
           {% comment %}
           <a class="cardATag" href="{% url 'posts/post_id' %}">
             {% endcomment %}
@@ -166,7 +166,7 @@
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="{{posts.user.profile.avatar}}"
+                          src="{{posts.user.avatar}}"
                           alt="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
                   />
                 </div>
@@ -174,7 +174,7 @@
                   <div class="card-body">
                     <h5 class="card-title">{{posts.user.username}}</h5>
                     <p class="card-text">
-                      {{posts.posts.description.all}}
+                      {{posts.description}}
                     </p>
                     <p class="card-text">
                       <small class="text-muted"
@@ -185,16 +185,14 @@
                 </div>
               </div>
             </div>
-            {% comment %} {% else %} {% endcomment %}
+            {% else %}
             <div class="card mb-3">
               <div class="row g-0">
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">Victor Doyle</h5>
+                    <h5 class="card-title">{{posts.user.username}}</h5>
                     <p class="card-text">
-                      This is a wider card with supporting text below as a natural
-                      lead-in to additional content. This content is a little bit
-                      longer.
+                      {{posts.description}}
                     </p>
                     <p class="card-text">
                       <small class="text-muted">Last updated 3 mins ago</small>
@@ -204,7 +202,7 @@
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="{{posts.user.profile.avatar}}"
+                          src="{{posts.user.avatar}}"
                           alt="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
                           style="float: right"
                   />
@@ -212,8 +210,8 @@
               </div>
             </div>
         </div>
+        {% endif %} 
         {% endfor %}
-        {% comment %} {% endif %}  {% endcomment %}
       </div>
     </div>
     {% comment %} end col {% endcomment %}

@@ -21,16 +21,7 @@ class Profile(models.Model):
     # class Attachment(paperclip.models.Attachment):
     #     pass
 
-
-class Post(models.Model):
-    title = models.CharField(max_length=20)
-    description = models.TextField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.title} from {self.user}"
+# need to have profile avatar in post class so i can load all posts on profile page
 
 
 class City(models.Model):
@@ -38,7 +29,19 @@ class City(models.Model):
     description = models.CharField(max_length=100)
     flags = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    posts = models.ManyToManyField(Post, blank=True)
+    # posts = models.ManyToManyField(Post, blank=True)
 
     def __str__(self):
         return self.name
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=20)
+    description = models.TextField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    city = models.ManyToManyField(City)
+
+    def __str__(self):
+        return f"{self.title} from {self.user}"

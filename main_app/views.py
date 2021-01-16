@@ -53,7 +53,7 @@ def profile(req):
     # posts
     posts = Post.objects.all()
     # profile
-    profile = Profile.objects.all()
+    profile = Profile.objects.all() 
     post_form = Post_Form()
     context = {'cities': cities, 'posts': posts,
                'post_form': post_form, 'profile': profile}
@@ -75,11 +75,11 @@ def profile(req):
 
 
 def post(request):
-  if request.method == "POST":
-    title = request.POST['title']
-    content = request.POST['content']
-    username_form = request.POST['username']
-    return redirect('posts')
+    if request.method == "POST":
+        title = request.POST['title']
+        content = request.POST['content']
+        username_form = request.POST['username']
+    return redirect('profile')
     
 """ def post_create(request):
     if request.method == 'POST':

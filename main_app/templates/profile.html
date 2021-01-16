@@ -156,7 +156,7 @@
               </button>
             </div>
           </div>
-          {% for posts in posts %} 
+          {% for post in posts %} 
           {% if forloop.counter|divisibleby:2 %} 
           {% comment %}
           <a class="cardATag" href="{% url 'posts/post_id' %}">
@@ -166,19 +166,19 @@
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="{{posts.user.avatar}}"
+                          src="{{post.user.avatar}}"
                           alt="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
                   />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">{{posts.user.username}}</h5>
+                    <h5 class="card-title">{{post.user.username}}</h5>
                     <p class="card-text">
-                      {{posts.description}}
+                      {{post.description}}
                     </p>
                     <p class="card-text">
                       <small class="text-muted"
-                      >Created at {{posts.created_at}}</small
+                      >Created at {{post.created_at}}</small
                       >
                     </p>
                   </div>
@@ -190,19 +190,19 @@
               <div class="row g-0">
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">{{posts.user.username}}</h5>
+                    <h5 class="card-title">{{post.user.username}}</h5>
                     <p class="card-text">
-                      {{posts.description}}
+                      {{post.description}}
                     </p>
                     <p class="card-text">
-                      <small class="text-muted">Created at {{posts.created_at}}</small>
+                      <small class="text-muted">Created at {{post.created_at}}</small>
                     </p>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="{{posts.user.avatar}}"
+                          src="{{post.user.avatar}}"
                           alt="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
                           style="float: right"
                   />

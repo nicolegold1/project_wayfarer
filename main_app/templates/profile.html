@@ -156,7 +156,8 @@
               </button>
             </div>
           </div>
-          {% for post in posts %} {% if forloop.counter|divisibleby:2 %}
+          {% for posts in cities %} 
+          {% comment %} {% if forloop.counter|divisibleby:2 %} {% endcomment %}
           {% comment %}
           <a class="cardATag" href="{% url 'posts/post_id' %}">
             {% endcomment %}
@@ -165,18 +166,15 @@
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
-                          alt="..."
+                          src="{{posts.user.profile.avatar}}"
+                          alt="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
                   />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">Sean Connery</h5>
+                    <h5 class="card-title">{{posts.user.username}}</h5>
                     <p class="card-text">
-                      Sir Sean Connery (born Thomas Connery; 25 August 1930 – 31
-                      October 2020) was a Scottish actor. He became known as the
-                      first actor to portray fictional British secret agent
-                      James Bond on film.
+                      {{posts.posts.description.all}}
                     </p>
                     <p class="card-text">
                       <small class="text-muted"
@@ -187,7 +185,7 @@
                 </div>
               </div>
             </div>
-            {% else %}
+            {% comment %} {% else %} {% endcomment %}
             <div class="card mb-3">
               <div class="row g-0">
                 <div class="col-md-8">
@@ -206,15 +204,16 @@
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
-                          alt="..."
+                          src="{{posts.user.profile.avatar}}"
+                          alt="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
                           style="float: right"
                   />
                 </div>
               </div>
             </div>
         </div>
-        {% endif %} {% endfor %}
+        {% endfor %}
+        {% comment %} {% endif %}  {% endcomment %}
       </div>
     </div>
     {% comment %} end col {% endcomment %}

@@ -52,8 +52,11 @@ def profile(req):
     cities = City.objects.all()
     # posts
     posts = Post.objects.all()
+    # profile
+    profile = Profile.objects.all()
     post_form = Post_Form()
-    context = {'cities': cities, 'posts': posts, 'post_form': post_form}
+    context = {'cities': cities, 'posts': posts,
+               'post_form': post_form, 'profile': profile}
     return render(req, 'profile.html', context)
     # Selected city
     # selected_city = City.objects.filter(id=city_id)

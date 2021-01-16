@@ -76,6 +76,16 @@ def post(req, post_id):
     return render(req, 'post.html', context)
 
 
+def posts_detail(req, post_id):
+    post = Post.objects.get(id=post_id)
+    # if request.method == "POST":
+    #     title = request.POST['title']
+    #     content = request.POST['content']
+    #     username_form = request.POST['username']
+    context = {'post': post}
+    return render(req, 'post.html', context)
+
+
 # def post_create(request):
 #     if request.method == 'POST':
 #         form = PostForm(request.POST)

@@ -157,7 +157,7 @@
             </div>
           </div>
           {% for posts in posts %} 
-          {% if forloop.counter|divisibleby:2 %}
+          {% if forloop.counter|divisibleby:2 %} 
           {% comment %}
           <a class="cardATag" href="{% url 'posts/post_id' %}">
             {% endcomment %}

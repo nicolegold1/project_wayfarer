@@ -75,13 +75,6 @@ def post(req, post_id):
     context = {'post': post}
     return render(req, 'post.html', context)
 
-
-def post(request):
-    if request.method == "POST":
-        title = request.POST['title']
-        content = request.POST['content']
-        username_form = request.POST['username']
-    return redirect('profile')
     
 """ def post_create(request):
     if request.method == 'POST':

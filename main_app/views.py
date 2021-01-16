@@ -43,17 +43,18 @@ def logout(request):
 def profile(req):
     if req.method == 'POST':
         form = Post_Form(req.POST)
+        selection = req.POST.get('id', None)
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.user = req.user
             new_post.save()
             return redirect('profile')
+    # posts The users post
+    posts = Post.objects.filter(user=req.user.profile)
     # all citys
     cities = City.objects.all()
-    # posts
-    posts = Post.objects.all()
     # profile
-    profile = Profile.objects.all()
+    profile = Profile.objects.get(user=req.user)
     post_form = Post_Form()
     context = {'cities': cities, 'posts': posts,
                'post_form': post_form, 'profile': profile}
@@ -61,8 +62,7 @@ def profile(req):
     # Selected city
     # selected_city = City.objects.filter(id=city_id)
 
-
-# 'city': selected_city,
+    # 'city': selected_city,
     # comment_form = AddComment_Form()
 
 

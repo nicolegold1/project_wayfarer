@@ -13,8 +13,8 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-    # cities = models.ManyToManyField(City)
     # posts = models.ManyToManyField(Post, blank=True)
+    # cities = models.ManyToManyField(City)
     # class FileType(paperclip.models.FileType):
     #     pass
 
@@ -41,7 +41,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    city = models.ManyToManyField(City)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.title} from {self.user}"
+        return f"{self.title}"

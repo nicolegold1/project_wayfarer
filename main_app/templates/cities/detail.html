@@ -54,17 +54,19 @@
   </div>
 </div>
 {% endblock %} {% block content %}
-<h1>{{city.name}}</h1>
-<a href="{% url 'city_edit' city.id %}"> edit {{city.name}}</a>
-{{city.description}}
-<img src="{{city.flags}}" class="cityFlagDetail" />
-<button
-  type="button"
-  class="btn btn-primary"
-  id="add-btn"
-  data-bs-toggle="modal"
-  data-bs-target="#cityModal"
->
-  <i class="fas fa-plus"></i>
-</button>
+<div class="cityDetailContainer">
+  <h1>{{city.name}}</h1>
+  <p><a href="{% url 'city_edit' city.id %}"> edit {{city.name}}</a></p>
+  <p>{{city.description}}</p>
+  <p><img src="{{city.flags}}" class="cityFlagDetail" /></p>
+  <button
+    type="button"
+    class="btn btn-primary"
+    id="add-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#cityModal"
+  >
+    <i class="fas fa-plus"></i>
+  </button>
+</div>
 {% endblock %}

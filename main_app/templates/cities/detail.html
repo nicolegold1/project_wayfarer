@@ -1,0 +1,72 @@
+{% extends 'base.html' %} {% block scripts %}
+<link
+  rel="stylesheet"
+  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+  crossorigin="anonymous"
+/>
+<div
+  class="modal fade"
+  id="cityModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <h1 class="city_title">Create a City</h1>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% comment %} modal {% endcomment %}
+      <div class="modal-body">
+        <div class="profilePageContainer">
+          <div class="card mb-3" id="postCard" style="max-width: 540px">
+            <form action="{% url 'city_index' %}" method="POST">
+              <div class="titleDiv form-group"></div>
+              {% csrf_token %} {{ city_form.as_p }}
+              <div class="modal-footer" style="justify-content: center">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary" value="Submit">
+                  Submit
+                </button>
+                <input type="hidden" name="next" value="{{ next }}" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% comment %} end of modal body {% endcomment %}
+  </div>
+</div>
+{% endblock %} {% block content %}
+<div class="cityDetailContainer">
+  <h1>{{city.name}}</h1>
+  <p><a href="{% url 'city_edit' city.id %}"> edit {{city.name}}</a></p>
+  <p>{{city.description}}</p>
+  <p><img src="{{city.flags}}" class="cityFlagDetail" /></p>
+  <button
+    type="button"
+    class="btn btn-primary"
+    id="add-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#cityModal"
+  >
+    <i class="fas fa-plus"></i>
+  </button>
+</div>
+{% endblock %}

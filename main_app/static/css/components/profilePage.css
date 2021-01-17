@@ -66,6 +66,18 @@ a {
   /* max-height: 190px; */
 }
 
+.rightPostProfile {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+
+.leftPostProfile {
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+}
+
 /* ================ list item side ==================== */
 .cityListRow {
   position: relative;

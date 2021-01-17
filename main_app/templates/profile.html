@@ -61,45 +61,45 @@
     <div class="col-4 cityListRow">
       <h1 class="city_title">Cities</h1>
       <section class="overflow-auto">
-      {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
-      <div class="card mb-3" style="max-width: 540px">
-        <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img class="cityListImage" src="{{city.flags}}" alt="..." />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{ city.name }}</h5>
-                <p class="card-text">{{ city.description }}</p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
+        {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
+        <div class="card mb-3" style="max-width: 540px">
+          <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img class="cityListImage" src="{{city.flags}}" alt="..." />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ city.name }}</h5>
+                  <p class="card-text">{{ city.description }}</p>
+                  <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-      {% else %}
-      <div class="card mb-3" style="max-width: 540px">
-        <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
-          <div class="row g-0">
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{city.name}}</h5>
-                <p class="card-text">{{ city.description }}</p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
+          </a>
+        </div>
+        {% else %}
+        <div class="card mb-3" style="max-width: 540px">
+          <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
+            <div class="row g-0">
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{city.name}}</h5>
+                  <p class="card-text">{{ city.description }}</p>
+                  <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <img class="cityListImage" src="{{city.flags}}" alt="..." />
               </div>
             </div>
-            <div class="col-md-4">
-              <img class="cityListImage" src="{{city.flags}}" alt="..." />
-            </div>
-          </div>
-        </a>
-      </div>
-      {% endif %} {% endfor %} {% comment %} end col {% endcomment %}
+          </a>
+        </div>
+        {% endif %} {% endfor %} {% comment %} end col {% endcomment %}
       </section>
     </div>
 
@@ -158,59 +158,58 @@
               </button>
             </div>
           </div>
-            {% for post in posts %}
-            <a class="cardATag" href="{% url 'posts_detail' post.id %}">
-              {% if forloop.counter|divisibleby:2 %}
-              <div class="card mb-3 postsContainer">
-                <div class="row g-0">
-                  <div class="col-md-4">
-                    <img
-                            class="cardPostImage"
-                            src="{{post.user.avatar}}"
-                            alt="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
-                    />
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
+          {% for post in posts %}
+          <a class="cardATag" href="{% url 'posts_detail' post.id %}">
+            {% if forloop.counter|divisibleby:2 %}
+            <div class="card mb-3 postsContainer">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                          class="cardPostImage"
+                          src="{{post.user.avatar}}"
+                          alt="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
                     <h5 class="card-title">{{post.title}}</h5>
-                      <p class="card-text">
-                        {{post.description}}
-                      </p>
-                      <p class="card-text">
-                        <small class="text-muted"
-                        >Created at {{post.created_at}}</small
-                        >
-                      </p>
-                    </div>
+                    <p class="card-text">
+                      {{post.description}}
+                    </p>
+                    <p class="card-text">
+                      <small class="text-muted rightPostProfile"
+                      >Created at {{post.created_at}}</small
+                      >
+                    </p>
                   </div>
                 </div>
               </div>
-              {% else %}
-              <div class="card mb-3">
-                <div class="row g-0">
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">{{post.title}}</h5>
-                      <p class="card-text">
-                        {{post.description}}
-                      </p>
-                      <p class="card-text">
-                        <small class="text-muted">Created at {{post.created_at}}</small>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <img
-                            class="cardPostImage"
-                            src="{{post.user.avatar}}"
-                            alt="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
-                            style="float: right"
-                    />
+            </div>
+            {% else %}
+            <div class="card mb-3">
+              <div class="row g-0">
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <p class="card-text">
+                      {{post.description}}
+                    </p>
+                    <p class="card-text">
+                      <small class="text-muted leftPostProfile">Created at {{post.created_at}}</small>
+                    </p>
                   </div>
                 </div>
+                <div class="col-md-4">
+                  <img
+                          class="cardPostImage"
+                          src="{{post.user.avatar}}"
+                          alt="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
+                          style="float: right"
+                  />
+                </div>
               </div>
-          </section>
-          {% endif %}
+            </div>
+            {% endif %}
           </a>
           {% endfor %}
         </div>

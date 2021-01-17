@@ -129,7 +129,7 @@ def city_edit(req, city_id):
         city_form = City_Form(req.POST, instance=city)
         if city_form.is_valid():
             city_form.save()
-            return redirect('cats_detail', city_id=city.id)
+            return redirect('city_detail', city_id=city.id)
 
     city_form = City_Form(instance=city)
     context = {'city_form': city_form, 'city': city}

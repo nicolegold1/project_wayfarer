@@ -71,3 +71,6 @@ def post_create(request):
         if form.is_valid():
             post = form.save()
             return redirect('profile')
+
+def view_posts(request):
+    return render(request, 'view_posts.html')

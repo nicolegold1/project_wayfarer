@@ -60,7 +60,7 @@
     {% comment %} List item Column {% endcomment %}
     <div class="col-4 cityListRow">
       <h1 class="city_title">Cities</h1>
-      <section class="overflow-auto">
+      <section class="overflow-auto cityScroll">
         {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
         <div class="card mb-3" style="max-width: 540px">
           <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">

@@ -78,6 +78,10 @@ a {
   right: 50%;
 }
 
+.cityScroll {
+  direction: rtl;
+}
+
 /* ================ list item side ==================== */
 .cityListRow {
   position: relative;

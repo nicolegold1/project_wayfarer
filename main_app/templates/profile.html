@@ -62,7 +62,7 @@
       <h1 class="city_title">Cities</h1>
       {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
       <div class="card mb-3" style="max-width: 540px">
-        <a class="list-group-item list-group-item-action" href="#list-item-1">
+        <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
           <div class="row g-0">
             <div class="col-md-4">
               <img class="cityListImage" src="{{city.flags}}" alt="..." />
@@ -81,7 +81,7 @@
       </div>
       {% else %}
       <div class="card mb-3" style="max-width: 540px">
-        <a class="list-group-item list-group-item-action" href="#list-item-2">
+        <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
           <div class="row g-0">
             <div class="col-md-8">
               <div class="card-body">

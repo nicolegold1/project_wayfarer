@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.db.models import signals
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -7,7 +9,6 @@ from .models import City, Profile, Post
 from .forms import Post_Form
 
 # Create your views here.
-
 
 def homepage(request):
     error_message = ''
@@ -39,19 +40,20 @@ def logout(request):
     return redirect('homepage')
 
 
-@login_required(login_url='homepage')
 def profile(req):
+    #user = User.objects.get(user_id=req.user_id)
+    #user.save()
     if req.method == 'POST':
         form = Post_Form(req.POST)
         if form.is_valid():
             new_post = form.save(commit=False)
-            new_post.user = req.user
+            new_post.user = req.user.profile
             new_post.save()
             return redirect('profile')
     # posts The users post
     posts = Post.objects.filter(user=req.user.profile)
     # all citys
-    cities = City.objects.all()
+    cities = City.objects.filter(user=req.user)
     # profile
     profile = Profile.objects.get(user=req.user)
     post_form = Post_Form()

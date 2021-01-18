@@ -66,6 +66,22 @@ a {
   /* max-height: 190px; */
 }
 
+.rightPostProfile {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+
+.leftPostProfile {
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+}
+
+.cityScroll {
+  direction: rtl;
+}
+
 /* ================ list item side ==================== */
 .cityListRow {
   position: relative;
@@ -80,7 +96,6 @@ a {
   height: 100vh;
 }
 
-
 .cityListImage {
   margin: 2%;
   object-fit: cover;
@@ -94,6 +109,7 @@ a {
 .user {
   float: right;
   text-align: right;
+  margin-right: 1%;
 }
 .username {
   margin: 0 auto;

@@ -1,13 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-<<<<<<< HEAD
-from django.views.generic.edit import UpdateView
-=======
+from django.views.generic import UpdateView
 from .models import City, Profile, Post
->>>>>>> origin/submaster
 
 # Create your views here.
 
@@ -83,19 +80,21 @@ def post_create(request):
 
 
 
-class EditUserProfileView(UpdateView):
+class EditUserProfileView(FormView):
     model = Profile
     form_class = UserProfileForm
     template_name = "profiles/user_profile.html"
-
-def get_object(self, *args, **kwargs):
-        user = get_object_or_404(User, pk=self.kwargs['pk'])
+    
+  def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send_email()
+        return super().form_valid(form)
 
         # We can also get user object using self.request.user  but that doesnt work
         # for other models.
 
         return user.userprofile
-
-def get_success_url(self, *args, **kwargs):
+    def get_success_url(self, *args, **kwargs):
         return reverse("some url name")
 

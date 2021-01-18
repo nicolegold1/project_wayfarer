@@ -8,21 +8,16 @@ from django.forms import ModelForm
 
 from accounts.models import UserProfile
 
-class EditProfileForm(ModelForm):
-         class Meta:
+
+class EditProfileForm(ModelForm)
+    class Meta:
         model = User
-         fields = (
-                 'username',
-                 'password',
-                 'cities'
-                )
+        fields = ['username','password', 'cities', 'profile image']
+
 class ProfileForm(ModelForm):
          class Meta:
          model = User
-         fields = (
-                 'username',
-                 'password',
-                 'cities')
+         fields = ['username','password','cities']
 
 class UserProfileForm(forms.ModelForm):
     class Meta:

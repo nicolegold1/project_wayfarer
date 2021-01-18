@@ -1,3 +1,9 @@
+/* no ahref styling */
+
+a {
+  text-decoration: none;
+}
+
 /* all */
 :root {
   --main-color: #f4f7ed;
@@ -78,4 +84,21 @@
   margin: 2%;
   object-fit: cover;
   width: 100%;
+}
+
+.user_information {
+  height: 46px;
+}
+
+.user {
+  float: right;
+  text-align: right;
+  margin-right: 1%;
+}
+.username {
+  margin: 0 auto;
+}
+
+.userlogin {
+  margin: 0 auto;
 }

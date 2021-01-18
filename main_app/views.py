@@ -1,9 +1,12 @@
+from django.contrib.auth.models import User
+from django.db.models import signals
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-
+from .models import City, Profile, Post
+from .forms import Post_Form
 
 # Create your views here.
 
@@ -16,7 +19,7 @@ def homepage(request):
                 user = form.save()
                 login(request, user)
                 return redirect('profile')
-            else: 
+            else:
                 error_message = "Invalid Sign Up - Please Try Again"
         elif request.POST.get('submit') == 'sign_in':
             username = request.POST.get('username')
@@ -37,40 +40,60 @@ def logout(request):
     return redirect('homepage')
 
 
-@login_required(login_url='homepage')
 def profile(req):
-    # if req.method == 'POST':
-    #     comment_form = AddComment_Form(req.POST)
-    #     if comment_form .is_valid():
-    #         new_comment = comment_form .save(commit=False)
-    #         new_comment.user = req.user
-    #         new_comment.save()
-    #         return redirect('profile')
-    # # Selected city
+    #user = User.objects.get(user_id=req.user_id)
+    #user.save()
+    if req.method == 'POST':
+        form = Post_Form(req.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.user = req.user.profile
+            new_post.save()
+            return redirect('profile')
+    # posts The users post
+    posts = Post.objects.filter(user=req.user.profile)
+    # all citys
+    cities = City.objects.filter(user=req.user)
+    # profile
+    profile = Profile.objects.get(user=req.user)
+    post_form = Post_Form()
+    context = {'cities': cities, 'posts': posts,
+               'post_form': post_form, 'profile': profile}
+    return render(req, 'profile.html', context)
+    # Selected city
     # selected_city = City.objects.filter(id=city_id)
 
-    # # all citys
-    # cities = SelectedCity.objects.all()
-
+    # 'city': selected_city,
     # comment_form = AddComment_Form()
-    # context = {'city': selected_city, 'cities': cities}
-    return render(req, 'profile.html')
 
-def posts(request):
-    return render(request, 'posts.html')
 
-def post(request):
-  if request.method == "POST":
-    title = request.POST['title']
-    content = request.POST['content']
-    username_form = request.POST['username']
+def post(req, post_id):
+    post = Post.objects.get(id=post_id)
+    # if request.method == "POST":
+    #     title = request.POST['title']
+    #     content = request.POST['content']
+    #     username_form = request.POST['username']
+    context = {'post': post}
+    return render(req, 'post.html', context)
 
-def post_create(request):
+    
+""" def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save()
-            return redirect('profile')
+    return redirect('profile') """
 
-def view_posts(request):
-    return render(request, 'view_posts.html')
+def posts_detail(request, post_id):
+    post = Post.objects.get(id=post_id)
+    context = {'post': post}
+    return render(request,'post.html', context)
+
+def posts(request, post_id):
+    post = Posts.objects.get(id=post_id)
+    # if request.method == "POST":
+    #   title = request.POST['title']
+    #   content = request.POST['content']
+    #   username_form = request.POST['username']
+    context = {'post': post}
+    return render(request. 'posts.html', context)

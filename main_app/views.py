@@ -27,20 +27,14 @@ def homepage(request):
                 email_body = " Welcome to the best site for travel"
                 from_email = settings.EMAIL_HOST_USER
                 new_user_email = user.email
-                to_list = [user.email, settings.EMAIL_HOST_USER]
-                send_mail(
+                to_list = [new_user_email, from_email]
+                email = EmailMessage(
                     email_subject,
                     email_body,
                     from_email,
-                    new_user_email,
                     to_list,
-                    fail_silently=True,
                 )
-                # email = EmailMessage(
-                #     email_subject,
-                #     email_body,
-                #     new_user_email,
-                # )
+                email.send()
                 return redirect('profile')
             else:
                 error_message = "Invalid Sign Up - Please Try Again"

@@ -13,6 +13,13 @@ from django.conf import settings
 # from django.contrib import messages
 
 # Create your views here.
+# email = EmailMessage(
+#     email_subject,
+#     email_body,
+#     from_email,
+#     to_list,
+# )
+# email.send(fail_silently=False)
 
 
 def homepage(request):
@@ -23,18 +30,19 @@ def homepage(request):
             if add_form.is_valid():
                 user = add_form.save()
                 login(request, user)
-                email_subject = "no-reply@wayfarer.com"
-                email_body = " Welcome to the best site for travel"
-                from_email = settings.EMAIL_HOST_USER
-                new_user_email = user.email
-                to_list = [new_user_email, from_email]
-                email = EmailMessage(
-                    email_subject,
-                    email_body,
-                    from_email,
-                    to_list,
-                )
-                email.send()
+                # email_subject = "no-reply@wayfarer.com"
+                # email_body = " Welcome to the best site for travel"
+                # from_email = settings.EMAIL_HOST_USER
+                # new_user_email = user.email
+                # to_list = [new_user_email, from_email]
+                # send_mail(
+                #     email_subject,
+                #     email_body,
+                #     from_email,
+                #     to_list,
+                #     fail_silently=False,
+                # )
+                # send_mail()
                 return redirect('profile')
             else:
                 error_message = "Invalid Sign Up - Please Try Again"

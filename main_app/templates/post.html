@@ -1,44 +1,19 @@
- {% extends 'base.html' %} {% block content %}
- 
- 
-<h1> {{ post.title }} <h1>
-<p> {{ post.created_at }} </p>
-<p> Author: {{ post.user.username }}
+{% extends 'base.html' %} {% block content %}
 
-<div class="container">
-  <div class="row align-items-start">
-    <div class="col">
-     {% comment %} empty space {% endcomment %}
+<h1>
+  {{ post.title }}
+  <h1>
+    <p>{{ post.created_at }}</p>
+    <p>Author: {{ post.user.username }}</p>
+
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col">{% comment %} empty space {% endcomment %}</div>
+        <div class="col">{{ post.description }}</div>
+        <div class="col">{% comment %} empty space {% endcomment %}</div>
+      </div>
     </div>
-    <div class="col">
-      {{ post.description }}
-    </div>
-    <div class="col">
-     {% comment %} empty space {% endcomment %}
-    </div>
-  </div>
-</div>
 
-
-{% endblock %}
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+    {% endblock %}
+  </h1>
+</h1>

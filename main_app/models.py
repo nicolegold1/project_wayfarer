@@ -7,6 +7,9 @@ from django.dispatch import receiver
 # Create your models here.
 
 
+# User._meta.get_field('email').blank = False
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.CharField(max_length=200)

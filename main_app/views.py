@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.views.generic.edit import UpdateView
 from .models import City, Profile, Post
 from .forms import Post_Form, City_Form, SignUpForm
 from django.core.mail import send_mail
@@ -107,6 +108,26 @@ def post(req, post_id):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save()
+            return redirect('profile')
+
+
+
+class EditUserProfileView(UpdateView):
+    model = Profile
+    form_class = UserProfileForm
+    template_name = "profiles/user_profile.html"
+
+def get_object(self, *args, **kwargs):
+        user = get_object_or_404(User, pk=self.kwargs['pk'])
+
+        # We can also get user object using self.request.user  but that doesnt work
+        # for other models.
+
+        return user.userprofile
+
+def get_success_url(self, *args, **kwargs):
+        return reverse("some url name")
+
     return redirect('profile') """
 
 
@@ -158,3 +179,4 @@ def city_edit(req, city_id):
     city_form = City_Form(instance=city)
     context = {'city_form': city_form, 'city': city}
     return render(req, 'cities/edit.html', context)
+

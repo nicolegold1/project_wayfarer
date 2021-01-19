@@ -11,6 +11,7 @@ from .forms import Post_Form, City_Form, SignUpForm
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.conf import settings
+from account.models import Account
 # from django.contrib import messages
 
 # Create your views here.
@@ -73,11 +74,11 @@ def profile(req):
         form = Post_Form(req.POST)
         if form.is_valid():
             new_post = form.save(commit=False)
-            new_post.user = req.user.profile
+            new_post.user = req.user
             new_post.save()
             return redirect('profile')
     # posts The users post
-    posts = Post.objects.filter(user=req.user.profile)
+    posts = Post.objects.filter(user=req.user)
     # all citys
     cities = City.objects.filter(user=req.user)
     # profile

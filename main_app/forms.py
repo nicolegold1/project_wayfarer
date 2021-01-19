@@ -1,34 +1,34 @@
 from django.forms import ModelForm
-from .models import Post, City
+from .models import Post, City, Profile
 from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
 # from .models import
-from accounts.models import UserProfile
+#from accounts.models import UserProfile
 
 
-class EditProfileForm(ModelForm)
-    class Meta:
-        model = User
-        fields = ['username','password', 'cities', 'profile image']
+# class EditProfileForm(ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ['username','password', 'cities', 'avatar']
 
-class ProfileForm(ModelForm):
-         class Meta:
-         model = User
-         fields = ['username','password','cities']
+# class ProfileForm(ModelForm):
+#          class Meta:
+#             model = User
+#             fields = ['username','password','cities']
 
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ('cities', 'country') #Note that we didn't mention user field here.
+# class UserProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = ('cities', 'country') #Note that we didn't mention user field here.
 
-    def save(self, user=None):
-        user_profile = super(UserProfileForm, self).save(commit=False)
-        if user:
-            user_profile.user = user
-        user_profile.save()
-        return user_profile
+#     def save(self, user=None):
+#         user_profile = super(UserProfileForm, self).save(commit=False)
+#         if user:
+#             user_profile.user = user
+#             user_profile.save()
+#             return user_profile
 
 
 # og submaster      
@@ -73,4 +73,14 @@ class City_Form(ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),
             'flag': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+class Profile_Form(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            # 'city': forms.Select(attrs={'class': 'form-control'}),
+            
+
         }

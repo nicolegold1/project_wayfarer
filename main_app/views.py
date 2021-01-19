@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views.generic.edit import UpdateView
 from .models import City, Profile, Post
-from .forms import Post_Form, City_Form, SignUpForm
+from .forms import Post_Form, City_Form, SignUpForm, Profile_Form
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -181,4 +181,16 @@ def city_edit(req, city_id):
     city_form = City_Form(instance=city)
     context = {'city_form': city_form, 'city': city}
     return render(req, 'cities/edit.html', context)
+
+def profile_edit(req, user_id):
+    user = User.objects.get(id=user_id)
+    if req.method == 'POST':
+        userCreation_form = Profile_Form(req.POST, instance=user.id)
+        if userCreation_form.is_valid():
+            userCreation_form.save()
+            return redirect('profile', user_id=user.id)
+
+    userCreation_form = Profile_Form(instance=user)
+    context = {'form': userCreation_form, 'user': user}
+    return render(req, 'userprofile.html', context)
 

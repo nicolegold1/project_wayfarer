@@ -180,7 +180,6 @@
             </div>
           </div>
         </div>
-        <div class="posts overflow-auto" id="posts">
           <div class="row">
             <div class="col-6">
               <h1>Posts</h1>
@@ -193,6 +192,7 @@
               </button>
             </div>
           </div>
+        <div class="posts overflow-auto" id="posts">
           <div></div>
           {% for post in posts %}
           <a class="cardATag" href="{% url 'posts_detail' post.id %}">

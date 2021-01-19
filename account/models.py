@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+# from main_app.models import Post, City
 
 # Create your models here.
 
@@ -17,6 +18,9 @@ class MyAccountManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
+            password=password,
+            first_name=first_name,
+            last_name=last_name
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -50,6 +54,8 @@ class Account(AbstractBaseUser):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     avatar = models.URLField(max_length=40)
+    # city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True)
+    # post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']

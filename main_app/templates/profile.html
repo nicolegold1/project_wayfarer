@@ -59,7 +59,40 @@
   <div class="row">
     {% comment %} List item Column {% endcomment %}
     <div class="col-4 cityListRow">
-      <h1 class="city_title">Cities</h1>
+    <!-- Button trigger modal for Add A City-->
+      <h1 class="city_title">Cities <button style="justify-content: end" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewCity">
+            Add A City
+          </button></h1>
+      {% comment %} Add new City button {% endcomment %}
+          <!-- Modal -->
+          <div class="modal fade" id="addNewCity" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add A City</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url 'city_index' %}" method="POST">
+                    <div class="titleDiv form-group"></div>
+                    {% csrf_token %} {{ city_form.as_p }}
+              <div class="modal-footer" style="justify-content: center">
+                <button type="button"class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary" value="Submit">
+                  Submit
+                </button>
+                <input type="hidden" name="next" value="{{ next }}" />
+              </div>
+            </form>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+      {% comment %} Cities content + posts {% endcomment %}
       <section class="overflow-auto cityScroll">
         {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
         <div class="card mb-3" style="max-width: 540px">
@@ -117,47 +150,62 @@
           seperate city {% endcomment %}
           <div class="col-6" id="list-item-1">
             <div class="cityname">
-              <h1>london</h1>
-              <h2>United Kingdom</h2>
+            {% if profile.city|length <= 0 %}
+               <h1> Tell Us Your Favorite City! </h1>
+            {% else %}
+             <h1> {{profile.city}}</h1>
+            {% endif %}
             </div>
           </div>
           <div class="col-6">
             <div class="user_information">
               {% comment %} userinformation {% endcomment %}
               <div class="user">
-                <p class="username">{{user.username}}</p>
+
+               <p class="username">{{profile.username}}</p>
+                <a href="{% url 'profile_detail' user.id %}">
+                <button  type="button" class="btn btn-primary" >
+            Edit Profile
+            <i class="fas fa-user-cog"></i>
+                </button>
+                </a>
                 <p class="userlogin text-muted">
                   Joined: {{user.date_joined.month}}, {{user.date_joined.year}}
                 </p>
               </div>
             </div>
             <div class="cityimg">
-              <img
+            
+            {% if profile.city.flags|length <= 0 %}
+             <img
                       class="cardCityImage"
-                      src="https://imageproxy.themaven.net//https%3A%2F%2Fwww.history.com%2F.image%2FMTYyNDg1MjE3MTI1Mjc5Mzk4%2Ftopic-london-gettyimages-760251843-promo.jpg"
+                      src="https://i.imgur.com/Lu90xpf.gif"
                       alt=""
               />
+            {% else %}
+              <img
+                      class="cardCityImage"
+                      src="{{ profile.city.flags }}"
+                      alt=""
+              />
+            {% endif %}
             </div>
           </div>
         </div>
-        <div class="posts overflow-auto">
+        <div class="posts overflow-auto" id="posts">
           <div class="row">
             <div class="col-6">
               <h1>Posts</h1>
             </div>
             <div class="col-6">
               {% comment %} button {% endcomment %}
-              <button
-                      type="button"
-                      class="btn btn-primary"
-                      id="add-btn"
-                      data-bs-toggle="modal"
-                      data-bs-target="#postModal"
-              >
+              <button type="button" class="btn btn-primary" id="add-btn" data-bs-toggle="modal" data-bs-target="#postModal">
                 <i class="fas fa-plus"></i>
+                Add A Post
               </button>
             </div>
           </div>
+          <div></div>
           {% for post in posts %}
           <a class="cardATag" href="{% url 'posts_detail' post.id %}">
             {% if forloop.counter|divisibleby:2 %}
@@ -166,7 +214,7 @@
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="{{post.user.avatar}}"
+                          src="{{profile.avatar}}"
                           alt="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
                   />
                 </div>
@@ -202,7 +250,7 @@
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="{{post.user.avatar}}"
+                          src="{{profile.avatar}}"
                           alt="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
                           style="float: right"
                   />

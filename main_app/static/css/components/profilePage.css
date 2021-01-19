@@ -4,14 +4,6 @@ a {
   text-decoration: none;
 }
 
-/* all */
-:root {
-  --main-color: #f4f7ed;
-  --secondary-color: #86ee60;
-  --third-color: #2e6e65;
-  --fourth-color: #2b3752;
-}
-
 .profilePageContainer {
   margin: 1%;
 }
@@ -57,9 +49,9 @@ a {
 }
 
 #add-btn {
-  border-radius: 100%;
+  /* border-radius: 100%; */
   float: right;
-  margin: 3%;
+  margin: 1%;
 }
 
 .card {
@@ -117,4 +109,8 @@ a {
 
 .userlogin {
   margin: 0 auto;
+}
+
+#posts {
+  overflow-x: hidden !important;
 }

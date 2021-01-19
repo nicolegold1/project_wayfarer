@@ -1,11 +1,3 @@
-/* all */
-:root {
-  --main-color: #f4f7ed;
-  --secondary-color: #86ee60;
-  --third-color: #2e6e65;
-  --fourth-color: #2b3752;
-}
-
 .cityFlagDetail {
   width: 250px;
 }

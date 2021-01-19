@@ -59,13 +59,11 @@
   <div class="row">
     {% comment %} List item Column {% endcomment %}
     <div class="col-4 cityListRow">
-      <h1 class="city_title">Cities</h1>
-      {% comment %} Add new City button {% endcomment %}
-      <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewCity">
+    <!-- Button trigger modal for Add A City-->
+      <h1 class="city_title">Cities <button style="justify-content: end" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewCity">
             Add A City
-          </button>
-
+          </button></h1>
+      {% comment %} Add new City button {% endcomment %}
           <!-- Modal -->
           <div class="modal fade" id="addNewCity" tabindex="-1">
             <div class="modal-dialog">
@@ -161,14 +159,15 @@
               {% comment %} userinformation {% endcomment %}
               <div class="user">
                <p class="username">{{user.username}}</p>
+                <a href="{% url 'profile_detail' user.id %}">
+                <button  type="button" class="btn btn-primary" >
+            Edit Profile
+            <i class="fas fa-user-cog"></i>
+                </button>
+                </a>
                 <p class="userlogin text-muted">
                   Joined: {{user.date_joined.month}}, {{user.date_joined.year}}
                 </p>
-                <a href="{% url 'profile_detail' user.id %}">
-                <button type="button" class="btn btn-primary" >
-            Edit Profile
-                </button>
-                </a>
               </div>
             </div>
             <div class="cityimg">

@@ -60,6 +60,34 @@
     {% comment %} List item Column {% endcomment %}
     <div class="col-4 cityListRow">
       <h1 class="city_title">Cities</h1>
+      {% comment %} Add new City button {% endcomment %}
+      <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewCity">
+            Add A City
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="addNewCity" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add A City</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+      {% comment %} Cities content + posts {% endcomment %}
       <section class="overflow-auto cityScroll">
         {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
         <div class="card mb-3" style="max-width: 540px">
@@ -125,10 +153,15 @@
             <div class="user_information">
               {% comment %} userinformation {% endcomment %}
               <div class="user">
-                <a href="{% url 'profile_detail' user.id %}"><p class="username">{{user.username}}</p></a>
+               <p class="username">{{user.username}}</p>
                 <p class="userlogin text-muted">
                   Joined: {{user.date_joined.month}}, {{user.date_joined.year}}
                 </p>
+                <a href="{% url 'profile_detail' user.id %}">
+                <button type="button" class="btn btn-primary" >
+            Edit Profile
+                </button>
+                </a>
               </div>
             </div>
             <div class="cityimg">

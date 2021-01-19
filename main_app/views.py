@@ -82,6 +82,15 @@ def profile(req):
             new_post.user = req.user
             new_post.save()
             return redirect('profile')
+
+    if req.method == 'POST':
+        city_form = City_Form(req.POST)
+        if city_form.is_valid():
+            new_city = city_form.save(commit=False)
+            new_city.user = req.user
+            new_city.save()
+            return redirect('city_index')
+
     # posts The users post
     posts = Post.objects.filter(user=req.user)
     # all citys
@@ -89,7 +98,8 @@ def profile(req):
     # profile
     profile = Profile.objects.get(user=req.user)
     post_form = Post_Form()
-    context = {'cities': cities, 'posts': posts,
+    city_form = City_Form()
+    context = {'city': city, 'city_form': city_form, 'cities': cities, 'posts': posts,
                'post_form': post_form, 'profile': profile}
     return render(req, 'profile.html', context)
 

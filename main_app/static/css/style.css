@@ -77,3 +77,7 @@ html body {
 /* .homeCards {
     text-align: center;
 } */
+
+.modal-footer {
+  justify-content: center;
+}

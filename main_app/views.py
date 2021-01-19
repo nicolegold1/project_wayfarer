@@ -89,7 +89,7 @@ def profile(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect('city_index')
+            return redirect('profile')
 
     # posts The users post
     posts = Post.objects.filter(user=req.user)
@@ -124,7 +124,7 @@ def profile_edit(req, profile_id):
         edit_form = Profile_Form(req.POST, instance=profile)
         if edit_form.is_valid():
             edit_form.save()
-            return redirect('profile_detail', profile_id=profile.id)
+            return redirect('profile')
 
     edit_form = Profile_Form(instance=profile)
     context = {'edit_form': edit_form, 'user': profile}
@@ -178,7 +178,7 @@ def city(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect('city_index')
+            return redirect('profile')
     city_form = City_Form()
     context = {'city': city, 'city_form': city_form}
     return render(req, 'cities/index.html', context)

@@ -46,6 +46,7 @@ class Post(models.Model):
 
 
 class Profile(models.Model):
+
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
@@ -53,12 +54,14 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=Account)
+
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=Account)
+
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 

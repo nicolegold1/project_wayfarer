@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+
+{% for post in posts %}
+<h1>
+  {{ post.title }}
+  <h1>
+    <p>{{ post.created_at }}</p>
+    <p>Author: {{ post.user.username }}</p>
+
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col">{% comment %} empty space {% endcomment %}</div>
+        <div class="col">{{ post.description }}</div>
+        <div class="col">{% comment %} empty space {% endcomment %}</div>
+      </div>
+    </div>
+
+    {% endfor %}
+    {% endblock %}
+  </h1>
+</h1>

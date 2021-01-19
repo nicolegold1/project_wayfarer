@@ -13,7 +13,7 @@
       <form action="{% url 'posts' %}" method="post">
         {% csrf_token %}
         <h1 class="city_title">Create a New Post</h1>
-        <div class="custom-select" style="width:200px;">
+        <div class="citySelect" style="width:200px;">
             <select>
               <option value="1">Barcelona</option>
               <option value="2">Berlin</option>
@@ -21,7 +21,6 @@
               <option value="4">New York</option>
               <option value="5">Paris</option>
               <option value="6">San Francisco</option>
-              
             </select>
         </div>
         <div class="titleDiv">

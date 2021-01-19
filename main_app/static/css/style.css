@@ -1,9 +1,11 @@
 /* profile page */
 @import "./components/profilePage.css";
-/* City details */
+/* Profile details */
 @import "./components/profileDetail.css";
 /* City details */
 @import "./components/cityDetails.css";
+/* Post All */
+@import "./components/postsAll.css";
 
 /* COLOR SCHEME */
 /* Dark Blue: #2b3752 */
@@ -78,12 +80,10 @@ html body {
     text-align: center;
 } */
 
-
 .modal-footer {
   justify-content: center;
 }
 
 .postShowContent {
   text-align: center;
-}    
-
+}

@@ -193,6 +193,7 @@
               </button>
             </div>
           </div>
+          <div></div>
           {% for post in posts %}
           <a class="cardATag" href="{% url 'posts_detail' post.id %}">
             {% if forloop.counter|divisibleby:2 %}

@@ -1,18 +1,29 @@
 {% extends 'base.html' %} {% block content %}
+{% comment %} THIS IS SHOW PAGE FOR SINGLE POST {% endcomment %}
 
-<h1>
-  {{ post.title }}
-  <h1>
-    <p>{{ post.created_at }}</p>
-    <p>Author: {{ post.user.username }}</p>
 
-    <div class="container">
-      <div class="row align-items-start">
-        <div class="col">{% comment %} empty space {% endcomment %}</div>
-        <div class="col">{{ post.description }}</div>
-        <div class="col">{% comment %} empty space {% endcomment %}</div>
-      </div>
+<div class="container">
+<div class="postShowContent"> 
+    <div class="row justify-content-center">
+    <br>
+            <h1>
+             Title: {{ post.title }}
+            <h1>
+    <h5 class="text-muted"> Posted on: {{ post.created_at }}</h5>
+
+      <h4>
+      Author: {{ post.user.username }}
+      </h4>
+
+        <div class="col">
+        <h2>
+        Post Description:
+        {{ post.description }}
+         </h2>
+        </div>
     </div>
+</div>
+</div>
 
     {% endblock %}
   </h1>

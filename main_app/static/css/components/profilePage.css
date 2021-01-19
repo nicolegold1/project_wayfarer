@@ -49,9 +49,9 @@ a {
 }
 
 #add-btn {
-  border-radius: 100%;
+  /* border-radius: 100%; */
   float: right;
-  margin: 3%;
+  margin: 1%;
 }
 
 .card {

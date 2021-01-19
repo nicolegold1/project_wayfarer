@@ -1,5 +1,7 @@
 /* profile page */
 @import "./components/profilePage.css";
+/* City details */
+@import "./components/cityDetails.css";
 
 /* COLOR SCHEME */
 /* Dark Blue: #2b3752 */
@@ -8,15 +10,19 @@
 /* Light Grey/Off White: #f4f7ed */
 
 html body {
-    background-color: #f4f7ed;
+  background-color: #f4f7ed;
+}
+
+.cardATag {
+  text-decoration: none;
+  color: inherit;
 }
 
 .navbar a {
-    color:#86ee60;
+  color: #86ee60;
 }
 .carousel .carousel-item {
   height: 550px !important;
-  
 }
 
 .carousel-item img {
@@ -33,22 +39,31 @@ html body {
 }
 
 .mainPageTitle {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .homePageMainRow {
-    padding-top: 1%;
+  padding-top: 1%;
+}
+
+#postCard {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+#comment {
+  height: 200px;
+  width: 100%;
+}
+
+.titleDiv {
+  padding: 10px;
 }
 
 /* Center aligned but check with client if they want left align */
 /* .homeCards {
     text-align: center;
-} */ 
-
-
-
-
-
-
-
+} */

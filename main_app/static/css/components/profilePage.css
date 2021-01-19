@@ -1,8 +1,14 @@
+/* no ahref styling */
+
+a {
+  text-decoration: none;
+}
+
 /* all */
 :root {
   --main-color: #f4f7ed;
   --secondary-color: #86ee60;
-  --thied-color: #2e6e65;
+  --third-color: #2e6e65;
   --fourth-color: #2b3752;
 }
 
@@ -60,6 +66,22 @@
   /* max-height: 190px; */
 }
 
+.rightPostProfile {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+
+.leftPostProfile {
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+}
+
+.cityScroll {
+  direction: rtl;
+}
+
 /* ================ list item side ==================== */
 .cityListRow {
   position: relative;
@@ -78,4 +100,21 @@
   margin: 2%;
   object-fit: cover;
   width: 100%;
+}
+
+.user_information {
+  height: 46px;
+}
+
+.user {
+  float: right;
+  text-align: right;
+  margin-right: 1%;
+}
+.username {
+  margin: 0 auto;
+}
+
+.userlogin {
+  margin: 0 auto;
 }

@@ -12,5 +12,5 @@ urlpatterns = [
     # path('profile/<int:city_id>/', views.profile, name='profile'),
     # path('post/', views.posts_index, name='posts_index'),
     path('posts/<int:post_id>/', views.post, name='posts_detail'),
-    path('posts/', views.post, name='all_posts')
+    path('posts/', views.posts, name='all_posts')
 ]

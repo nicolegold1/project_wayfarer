@@ -135,11 +135,7 @@ def city_edit(req, city_id):
     context = {'city_form': city_form, 'city': city}
     return render(req, 'cities/edit.html', context)
 
-""" def posts(request, post_id):
-    post = Posts.objects.get(id=post_id)
-    # if request.method == "POST":
-    #   title = request.POST['title']
-    #   content = request.POST['content']
-    #   username_form = request.POST['username']
-    context = {'post': post}
-    return render(request. 'posts.html', context) """
+def posts(request):
+    posts = Post.objects.all()
+    context = {'posts': posts}
+    return render(request, 'posts.html', context)

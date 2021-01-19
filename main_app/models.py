@@ -1,3 +1,4 @@
+
 from django.contrib.auth import get_user
 from django.contrib.auth.forms import UserChangeForm
 from django.db import models
@@ -7,25 +8,6 @@ from django.dispatch import receiver
 # Create your models here.
 from account.models import Account
 
-
-class Profile(models.Model):
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    avatar = models.CharField(max_length=200)
-    joined = models.DateTimeField(auto_now_add=True)
-
-
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-
-
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
-
-#     def __str__(self):
-#         return self.user.username
 
 # posts = models.ManyToManyField(Post, blank=True)
 # cities = models.ManyToManyField(City)
@@ -61,3 +43,24 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
+    avatar = models.CharField(max_length=200)
+
+
+@receiver(post_save, sender=Account)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=Account)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+    def __str__(self):
+        return self.user.username

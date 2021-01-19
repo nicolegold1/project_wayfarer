@@ -125,7 +125,7 @@
             <div class="user_information">
               {% comment %} userinformation {% endcomment %}
               <div class="user">
-                <a href="{% url 'profile_detail' user.id %}"><p class="username">{{user.username}}</p></a>
+                <a href="{% url 'profile_detail' user.id %}"><p class="username">{{profile.username}}</p></a>
                 <p class="userlogin text-muted">
                   Joined: {{user.date_joined.month}}, {{user.date_joined.year}}
                 </p>
@@ -140,7 +140,7 @@
             </div>
           </div>
         </div>
-        <div class="posts overflow-auto">
+        <div class="posts overflow-auto" id="posts">
           <div class="row">
             <div class="col-6">
               <h1>Posts</h1>

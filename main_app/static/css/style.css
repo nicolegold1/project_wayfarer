@@ -1,6 +1,8 @@
 /* profile page */
 @import "./components/profilePage.css";
 /* City details */
+@import "./components/profileDetail.css";
+/* City details */
 @import "./components/cityDetails.css";
 
 /* COLOR SCHEME */
@@ -8,6 +10,14 @@
 /* Light Blue/Greenish: #2e6e65 */
 /* Green: #86ee60 */
 /* Light Grey/Off White: #f4f7ed */
+
+/* all */
+:root {
+  --main-color: #f4f7ed;
+  --secondary-color: #86ee60;
+  --third-color: #2e6e65;
+  --fourth-color: #2b3752;
+}
 
 html body {
   background-color: #f4f7ed;

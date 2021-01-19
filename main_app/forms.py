@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-# from .models import
+from .models import Account
 
 
 class SignUpForm(UserCreationForm):
@@ -16,7 +16,7 @@ class SignUpForm(UserCreationForm):
         attrs={'class': 'form-control'}))
 
     class Meta:
-        model = User
+        model = Account
         fields = ['username', 'first_name', 'last_name',
                   'email', 'password1', 'password2', ]
 
@@ -46,5 +46,5 @@ class City_Form(ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),
-            'flag': forms.TextInput(attrs={'class': 'form-control'}),
+            'flags': forms.TextInput(attrs={'class': 'form-control'}),
         }

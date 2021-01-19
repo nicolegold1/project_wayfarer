@@ -5,8 +5,12 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('login/', views.login, name='login'),
     path('profile/', views.profile, name='profile'),
+    path('city/', views.city, name='city_index'),
+    path('city/<int:city_id>/', views.city_detail, name='city_detail'),
+    path('city/<int:city_id>/edit/', views.city_edit, name='city_edit'),
+    # path('city/<int:city_id>/delete', views.city_delete, name='city_delete'),
     # path('profile/<int:city_id>/', views.profile, name='profile'),
     # path('post/', views.posts_index, name='posts_index'),
     path('posts/<int:post_id>/', views.post, name='posts_detail'),
-    path('posts/', views.post, name='posts')
+    path('posts/', views.post, name='all_posts')
 ]

@@ -44,13 +44,13 @@
                 <input type="hidden" name="next" value="{{ next }}" />
               </div>
             </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  {% comment %} end of modal body {% endcomment %}
+    {% comment %} end of modal body {% endcomment %}
 
-</div>
+  </div>
 </div>
 </div>
 </div>
@@ -60,45 +60,47 @@
     {% comment %} List item Column {% endcomment %}
     <div class="col-4 cityListRow">
       <h1 class="city_title">Cities</h1>
-      {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
-      <div class="card mb-3" style="max-width: 540px">
-        <a class="list-group-item list-group-item-action" href="#list-item-1">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img class="cityListImage" src="{{city.flags}}" alt="..." />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{ city.name }}</h5>
-                <p class="card-text">{{ city.description }}</p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
+      <section class="overflow-auto cityScroll">
+        {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
+        <div class="card mb-3" style="max-width: 540px">
+          <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img class="cityListImage" src="{{city.flags}}" alt="..." />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ city.name }}</h5>
+                  <p class="card-text">{{ city.description }}</p>
+                  <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-      {% else %}
-      <div class="card mb-3" style="max-width: 540px">
-        <a class="list-group-item list-group-item-action" href="#list-item-2">
-          <div class="row g-0">
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{city.name}}</h5>
-                <p class="card-text">{{ city.description }}</p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
+          </a>
+        </div>
+        {% else %}
+        <div class="card mb-3" style="max-width: 540px">
+          <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
+            <div class="row g-0">
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{city.name}}</h5>
+                  <p class="card-text">{{ city.description }}</p>
+                  <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <img class="cityListImage" src="{{city.flags}}" alt="..." />
               </div>
             </div>
-            <div class="col-md-4">
-              <img class="cityListImage" src="{{city.flags}}" alt="..." />
-            </div>
-          </div>
-        </a>
-      </div>
-      {% endif %} {% endfor %} {% comment %} end col {% endcomment %}
+          </a>
+        </div>
+        {% endif %} {% endfor %} {% comment %} end col {% endcomment %}
+      </section>
     </div>
 
     {% comment %} Selected city Column {% endcomment %}
@@ -138,7 +140,7 @@
             </div>
           </div>
         </div>
-        <div class="posts">
+        <div class="posts overflow-auto">
           <div class="row">
             <div class="col-6">
               <h1>Posts</h1>
@@ -156,9 +158,9 @@
               </button>
             </div>
           </div>
-          {% for post in posts %} 
+          {% for post in posts %}
           <a class="cardATag" href="{% url 'posts_detail' post.id %}">
-          {% if forloop.counter|divisibleby:2 %} 
+            {% if forloop.counter|divisibleby:2 %}
             <div class="card mb-3 postsContainer">
               <div class="row g-0">
                 <div class="col-md-4">
@@ -170,12 +172,12 @@
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">{{post.user.username}}</h5>
+                    <h5 class="card-title">{{post.title}}</h5>
                     <p class="card-text">
                       {{post.description}}
                     </p>
                     <p class="card-text">
-                      <small class="text-muted"
+                      <small class="text-muted rightPostProfile"
                       >Created at {{post.created_at}}</small
                       >
                     </p>
@@ -188,12 +190,12 @@
               <div class="row g-0">
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">{{post.user.username}}</h5>
+                    <h5 class="card-title">{{post.title}}</h5>
                     <p class="card-text">
                       {{post.description}}
                     </p>
                     <p class="card-text">
-                      <small class="text-muted">Created at {{post.created_at}}</small>
+                      <small class="text-muted leftPostProfile">Created at {{post.created_at}}</small>
                     </p>
                   </div>
                 </div>
@@ -207,10 +209,10 @@
                 </div>
               </div>
             </div>
+            {% endif %}
+          </a>
+          {% endfor %}
         </div>
-        {% endif %} 
-        </a>
-        {% endfor %}
       </div>
     </div>
     </a>

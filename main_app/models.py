@@ -12,10 +12,12 @@ class Profile(models.Model):
     avatar = models.CharField(max_length=200)
     joined = models.DateTimeField(auto_now_add=True)
 
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
@@ -31,6 +33,7 @@ def save_user_profile(sender, instance, **kwargs):
     # class Attachment(paperclip.models.Attachment):
     #     pass
 # need to have profile avatar in post class so i can load all posts on profile page
+
 
 class City(models.Model):
     name = models.CharField(max_length=20)
@@ -53,3 +56,6 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+    class Meta:
+        ordering = ['-created_at']

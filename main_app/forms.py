@@ -1,14 +1,14 @@
-from django.forms import ModelForm
-from .models import Post, City, Profile
+from django import forms
 from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
-from django import forms
+from django.forms import ModelForm
+from .models import Post, City, Profile
 from .models import Account
 
 # from .models import
 
-#from accounts.models import UserProfile
+# from accounts.models import UserProfile
 
 
 # class EditProfileForm(ModelForm):
@@ -78,6 +78,8 @@ class City_Form(ModelForm):
             'description': forms.TextInput(attrs={'class': 'form-control'}),
             'flags': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
 class Profile_Form(ModelForm):
     class Meta:
         model = User
@@ -85,6 +87,6 @@ class Profile_Form(ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             # 'city': forms.Select(attrs={'class': 'form-control'}),
-            
+
 
         }

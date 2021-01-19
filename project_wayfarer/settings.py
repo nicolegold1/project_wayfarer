@@ -12,15 +12,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 # from .email_info import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_USE_TLS, EMAIL_HOST_PASSWORD
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'projectwayfarersei@gmail.com'
-EMAIL_HOST_PASSWORD = 'Prometheus2021'
-EMAIL_USE_TLS = True
 # EMAIL_HOST = EMAIL_HOST
 # EMAIL_PORT = EMAIL_PORT
 # EMAIL_HOST_USER = EMAIL_HOST_USER
@@ -43,6 +39,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main_app',
+    'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -135,3 +132,9 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/profile/'
 
 LOGOUT_REDIRECT_URL = '/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+AUTH_USER_MODEL = 'account.Account'

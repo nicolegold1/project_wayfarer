@@ -14,4 +14,3 @@ urlpatterns = [
     # path('post/', views.posts_index, name='posts_index'),
     path('posts/<int:post_id>/', views.post, name='posts_detail')
 ]
-

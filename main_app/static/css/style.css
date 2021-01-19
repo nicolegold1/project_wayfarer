@@ -1,13 +1,25 @@
 /* profile page */
 @import "./components/profilePage.css";
+/* Profile details */
+@import "./components/profileDetail.css";
 /* City details */
 @import "./components/cityDetails.css";
+/* Post All */
+@import "./components/postsAll.css";
 
 /* COLOR SCHEME */
 /* Dark Blue: #2b3752 */
 /* Light Blue/Greenish: #2e6e65 */
 /* Green: #86ee60 */
 /* Light Grey/Off White: #f4f7ed */
+
+/* all */
+:root {
+  --main-color: #f4f7ed;
+  --secondary-color: #86ee60;
+  --third-color: #2e6e65;
+  --fourth-color: #2b3752;
+}
 
 html body {
   background-color: #f4f7ed;
@@ -68,6 +80,10 @@ html body {
     text-align: center;
 } */
 
+.modal-footer {
+  justify-content: center;
+}
+
 .postShowContent {
   text-align: center;
-}    
+}

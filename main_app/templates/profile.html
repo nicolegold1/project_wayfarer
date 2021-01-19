@@ -150,8 +150,11 @@
           seperate city {% endcomment %}
           <div class="col-6" id="list-item-1">
             <div class="cityname">
-              <h1>london</h1>
-              <h2>United Kingdom</h2>
+            {% if profile.city|length <= 0 %}
+               <h1> Tell Us Your Favorite City! </h1>
+            {% else %}
+             <h1> {{profile.city}}</h1>
+            {% endif %}
             </div>
           </div>
           <div class="col-6">
@@ -172,11 +175,20 @@
               </div>
             </div>
             <div class="cityimg">
-              <img
+            
+            {% if profile.city.flags|length <= 0 %}
+             <img
                       class="cardCityImage"
-                      src="https://imageproxy.themaven.net//https%3A%2F%2Fwww.history.com%2F.image%2FMTYyNDg1MjE3MTI1Mjc5Mzk4%2Ftopic-london-gettyimages-760251843-promo.jpg"
+                      src="https://i.imgur.com/Lu90xpf.gif"
                       alt=""
               />
+            {% else %}
+              <img
+                      class="cardCityImage"
+                      src="{{ profile.city.flags }}"
+                      alt=""
+              />
+            {% endif %}
             </div>
           </div>
         </div>

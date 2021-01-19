@@ -158,7 +158,8 @@
             <div class="user_information">
               {% comment %} userinformation {% endcomment %}
               <div class="user">
-               <p class="username">{{user.username}}</p>
+
+               <p class="username">{{profile.username}}</p>
                 <a href="{% url 'profile_detail' user.id %}">
                 <button  type="button" class="btn btn-primary" >
             Edit Profile
@@ -179,7 +180,7 @@
             </div>
           </div>
         </div>
-        <div class="posts overflow-auto">
+        <div class="posts overflow-auto" id="posts">
           <div class="row">
             <div class="col-6">
               <h1>Posts</h1>
@@ -200,7 +201,7 @@
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="{{post.user.avatar}}"
+                          src="{{profile.avatar}}"
                           alt="https://static.independent.co.uk/2020/10/31/17/connery-head.jpg"
                   />
                 </div>
@@ -236,7 +237,7 @@
                 <div class="col-md-4">
                   <img
                           class="cardPostImage"
-                          src="{{post.user.avatar}}"
+                          src="{{profile.avatar}}"
                           alt="https://ca.slack-edge.com/T0351JZQ0-U01DGR9PCU8-d7d02626fb4c-512"
                           style="float: right"
                   />

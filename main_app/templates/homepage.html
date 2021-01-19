@@ -39,13 +39,13 @@
         <h5 class="modal-title" id="exampleModalLabel">Login</h5>
       </div>
           <div class="modal-body">
-        <form method="POST">{% csrf_token %}
-            <label for="username">Username:</label>
-            <input type="text" name="username" value="" id="username"><br>
+        <form method="POST" class="form-control">{% csrf_token %}
+            <label for="username">Email:</label>
+            <input type="text" name="username" value="" id="username" class="form-control"><br>
             <label for="password">Password:</label>
-            <input type="password" name="password" value="" id="password"><br>
+            <input type="password" name="password" value="" id="password" class="form-control"><br>
         
-        <div class="modal-footer">
+        <div class="modal-footer" style="justify-content: center;">
           <input type="submit" class="btn btn-primary" name="submit" value="sign_in"/>
           <input type="hidden" name="next" value="{{ next }}" />
           {% if form.errors %}
@@ -75,8 +75,8 @@
             {% csrf_token %}
             {{ form.as_p }}
       </div>
-      <div class="modal-footer">
-        <input type="submit" class="btn btn-primary" name="submit" value="sign_up"/>
+      <div class="modal-footer" style="justify-content: center;">
+        <input type="submit" class="btn btn-primary" name="submit" value="sign_up" />
           <input type="hidden" name="next" value="{{ next }}" />
         </form>
       </div>

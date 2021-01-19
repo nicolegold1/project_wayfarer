@@ -29,7 +29,7 @@ from account.models import Account
 def homepage(request):
     error_message = ''
     if request.method == "POST":
-        if request.POST.get('submit') == 'sign_up':
+        if request.POST.get('submit') == 'Sign Up':
             add_form = SignUpForm(request.POST)
             if add_form.is_valid():
                 user = add_form.save()
@@ -50,7 +50,7 @@ def homepage(request):
                 return redirect('profile')
             else:
                 error_message = "Invalid Sign Up - Please Try Again"
-        elif request.POST.get('submit') == 'sign_in':
+        elif request.POST.get('submit') == 'Sign In':
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = authenticate(request, username=username, password=password)

@@ -2,23 +2,49 @@ from django.contrib.auth.models import User
 from django.db.models import signals
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.views.generic.edit import UpdateView
 from .models import City, Profile, Post
-from .forms import Post_Form, City_Form
+from .forms import Post_Form, City_Form, SignUpForm, Profile_Form
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.conf import settings
+from account.models import Account
+# from django.contrib import messages
 
 # Create your views here.
+# email = EmailMessage(
+#     email_subject,
+#     email_body,
+#     from_email,
+#     to_list,
+# )
+# email.send(fail_silently=False)
 
 
 def homepage(request):
     error_message = ''
     if request.method == "POST":
         if request.POST.get('submit') == 'sign_up':
-            form = UserCreationForm(request.POST)
-            if form.is_valid():
-                user = form.save()
+            add_form = SignUpForm(request.POST)
+            if add_form.is_valid():
+                user = add_form.save()
                 login(request, user)
+                # email_subject = "no-reply@wayfarer.com"
+                # email_body = " Welcome to the best site for travel"
+                # from_email = settings.EMAIL_HOST_USER
+                # new_user_email = user.email
+                # to_list = [new_user_email, from_email]
+                # send_mail(
+                #     email_subject,
+                #     email_body,
+                #     from_email,
+                #     to_list,
+                #     fail_silently=False,
+                # )
+                # send_mail()
                 return redirect('profile')
             else:
                 error_message = "Invalid Sign Up - Please Try Again"
@@ -31,7 +57,7 @@ def homepage(request):
                 return redirect('profile')
             else:
                 error_message = "Invalid Sign In Credentials - Please Try Again"
-    form = UserCreationForm()
+    form = SignUpForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'homepage.html', context)
 
@@ -48,11 +74,11 @@ def profile(req):
         form = Post_Form(req.POST)
         if form.is_valid():
             new_post = form.save(commit=False)
-            new_post.user = req.user.profile
+            new_post.user = req.user
             new_post.save()
             return redirect('profile')
     # posts The users post
-    posts = Post.objects.filter(user=req.user.profile)
+    posts = Post.objects.filter(user=req.user)
     # all citys
     cities = City.objects.filter(user=req.user)
     # profile
@@ -83,6 +109,28 @@ def post(req, post_id):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save()
+            return redirect('profile')
+
+
+
+class EditUserProfileView(FormView):
+    model = Profile
+    form_class = UserProfileForm
+    template_name = "profiles/user_profile.html"
+    
+  def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send_email()
+        return super().form_valid(form)
+
+        # We can also get user object using self.request.user  but that doesnt work
+        # for other models.
+
+        return user.userprofile
+    def get_success_url(self, *args, **kwargs):
+        return reverse("some url name")
+
     return redirect('profile') """
 
 
@@ -135,7 +183,23 @@ def city_edit(req, city_id):
     context = {'city_form': city_form, 'city': city}
     return render(req, 'cities/edit.html', context)
 
+
 def posts(request):
     posts = Post.objects.all()
     context = {'posts': posts}
     return render(request, 'posts.html', context)
+
+  
+def profile_edit(req, user_id):
+    user = User.objects.get(id=user_id)
+    if req.method == 'POST':
+        userCreation_form = Profile_Form(req.POST, instance=user.id)
+        if userCreation_form.is_valid():
+            userCreation_form.save()
+            return redirect('profile', user_id=user.id)
+
+    userCreation_form = Profile_Form(instance=user)
+    context = {'form': userCreation_form, 'user': user}
+    return render(req, 'userprofile.html', context)
+
+

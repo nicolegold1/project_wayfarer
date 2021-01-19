@@ -1,0 +1,10 @@
+.postCard {
+  width: 85%;
+  justify-content: center;
+  display: flex;
+  margin: 2% auto;
+}
+.postHeader {
+  margin: 0 auto;
+  line-height: 0.7;
+}

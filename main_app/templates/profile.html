@@ -125,7 +125,7 @@
             <div class="user_information">
               {% comment %} userinformation {% endcomment %}
               <div class="user">
-                <p class="username">{{user.username}}</p>
+                <a href="{% url 'profile_detail' user.id %}"><p class="username">{{user.username}}</p></a>
                 <p class="userlogin text-muted">
                   Joined: {{user.date_joined.month}}, {{user.date_joined.year}}
                 </p>

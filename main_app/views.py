@@ -95,17 +95,25 @@ def profile(req):
 
 
 @login_required
-def profile_edit(req, user_id):
-    user = User.objects.get(id=user_id)
-    if req.method == 'POST':
-        userCreation_form = Profile_Form(req.POST, instance=user.id)
-        if userCreation_form.is_valid():
-            userCreation_form.save()
-            return redirect('profile', user_id=user.id)
+def profile_detail(req, profile_id):
+    user = Profile.objects.get(id=profile_id)
+    edit_form = Profile_Form()
+    context = {'user': user, 'edit_form': edit_form}
+    return render(req, 'profile_detail.html', context)
 
-    userCreation_form = Profile_Form(instance=user)
-    context = {'form': userCreation_form, 'user': user}
-    return render(req, 'userprofile.html', context)
+
+@login_required
+def profile_edit(req, profile_id):
+    profile = Profile.objects.get(id=profile_id)
+    if req.method == 'POST':
+        edit_form = Profile_Form(req.POST, instance=profile)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile_detail', profile_id=profile.id)
+
+    edit_form = Profile_Form(instance=profile)
+    context = {'edit_form': edit_form, 'user': profile}
+    return render(req, 'profile.html', context)
 
 
 # ===========================Posts pages ==========================

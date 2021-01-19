@@ -48,9 +48,12 @@ class Post(models.Model):
 class Profile(models.Model):
 
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     avatar = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.user.username
 
 
 @receiver(post_save, sender=Account)
@@ -62,6 +65,3 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Account)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
-    def __str__(self):
-        return self.user.username

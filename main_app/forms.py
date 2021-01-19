@@ -82,11 +82,10 @@ class City_Form(ModelForm):
 
 class Profile_Form(ModelForm):
     class Meta:
-        model = User
-        fields = ['username']
+        model = Profile
+        fields = ['user', 'city', 'avatar']
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            # 'city': forms.Select(attrs={'class': 'form-control'}),
-
-
+            'user': forms.TextInput(attrs={'class': 'form-control'}),
+            'avatar': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.Select(attrs={'class': 'form-control'}),
         }

@@ -45,8 +45,8 @@
             <label for="password">Password:</label>
             <input type="password" name="password" value="" id="password" class="form-control"><br>
         
-        <div class="modal-footer" style="justify-content: center;">
-          <input type="submit" class="btn btn-primary" name="submit" value="sign_in"/>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-primary" name="submit" value="Sign In"/>
           <input type="hidden" name="next" value="{{ next }}" />
           {% if form.errors %}
           <p>Your username and password didn't match. Please try again.</p>
@@ -75,8 +75,8 @@
             {% csrf_token %}
             {{ form.as_p }}
       </div>
-      <div class="modal-footer" style="justify-content: center;">
-        <input type="submit" class="btn btn-primary" name="submit" value="sign_up" />
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" name="submit" value="Sign Up"/>
           <input type="hidden" name="next" value="{{ next }}" />
         </form>
       </div>

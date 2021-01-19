@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Hello this is your user page</h1>
+<h1>Edit {{ user.user }}</h1>
+<form action="{% url 'profile_edit' user.id %}" method="POST">
+  {%csrf_token %} {{ edit_form.as_p }}
+  <input class="btn btn-primary" type="submit" value="Edit Profile" />
+</form>
+{% endblock %}

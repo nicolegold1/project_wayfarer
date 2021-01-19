@@ -1,8 +1,8 @@
 
 from django.contrib.auth import get_user
 from django.contrib.auth.forms import UserChangeForm
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Create your models here.
@@ -48,22 +48,20 @@ class Post(models.Model):
 class Profile(models.Model):
 
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     avatar = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.user.username
 
 
 @receiver(post_save, sender=Account)
-
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=Account)
-
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
-    def __str__(self):
-        return self.user.username

@@ -1,16 +1,16 @@
+from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import signals
-from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.db.models import signals
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 from .models import City, Profile, Post
 from .forms import Post_Form, City_Form, SignUpForm, Profile_Form
-from django.core.mail import send_mail
-from django.core.mail import EmailMessage
-from django.conf import settings
 from account.models import Account
 # from django.contrib import messages
 
@@ -22,6 +22,8 @@ from account.models import Account
 #     to_list,
 # )
 # email.send(fail_silently=False)
+
+# ===========================home page ==========================
 
 
 def homepage(request):
@@ -67,6 +69,9 @@ def logout(request):
     return redirect('homepage')
 
 
+# ===================== Profile =========================
+
+@login_required
 def profile(req):
     # user = User.objects.get(user_id=req.user_id)
     # user.save()
@@ -87,13 +92,38 @@ def profile(req):
     context = {'cities': cities, 'posts': posts,
                'post_form': post_form, 'profile': profile}
     return render(req, 'profile.html', context)
-    # Selected city
-    # selected_city = City.objects.filter(id=city_id)
-
-    # 'city': selected_city,
-    # comment_form = AddComment_Form()
 
 
+@login_required
+def profile_detail(req, profile_id):
+    user = Profile.objects.get(id=profile_id)
+    if req.method == 'POST':
+        edit_form = Profile_Form(req.POST, instance=profile)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile_detail', profile_id=profile.id)
+    edit_form = Profile_Form(instance=user)
+    context = {'user': user, 'edit_form': edit_form}
+    return render(req, 'profile_detail.html', context)
+
+
+@login_required
+def profile_edit(req, profile_id):
+    profile = Profile.objects.get(id=profile_id)
+    if req.method == 'POST':
+        edit_form = Profile_Form(req.POST, instance=profile)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile_detail', profile_id=profile.id)
+
+    edit_form = Profile_Form(instance=profile)
+    context = {'edit_form': edit_form, 'user': profile}
+    return render(req, 'profile_detail.html', context)
+
+
+# ===========================Posts pages ==========================
+
+@login_required
 def post(req, post_id):
     post = Post.objects.get(id=post_id)
     # if request.method == "POST":
@@ -104,42 +134,32 @@ def post(req, post_id):
     return render(req, 'post.html', context)
 
 
-""" def post_create(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save()
-            return redirect('profile')
-
-
-
-class EditUserProfileView(FormView):
-    model = Profile
-    form_class = UserProfileForm
-    template_name = "profiles/user_profile.html"
-    
-  def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.send_email()
-        return super().form_valid(form)
-
-        # We can also get user object using self.request.user  but that doesnt work
-        # for other models.
-
-        return user.userprofile
-    def get_success_url(self, *args, **kwargs):
-        return reverse("some url name")
-
-    return redirect('profile') """
-
-
+@login_required
 def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     context = {'post': post}
     return render(request, 'post.html', context)
 
 
+@login_required
+def posts(request):
+    posts = Post.objects.all()
+    context = {'posts': posts}
+    return render(request, 'posts.html', context)
+
+
+""" def post_create(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            return redirect('profile')
+ """
+
+
+# ===========================City pages ==========================
+
+@login_required
 def city(req):
     # create
     if req.method == 'POST':
@@ -154,6 +174,7 @@ def city(req):
     return render(req, 'cities/index.html', context)
 
 
+@login_required
 def city_detail(req, city_id):
     # create
     if req.method == 'POST':
@@ -182,24 +203,3 @@ def city_edit(req, city_id):
     city_form = City_Form(instance=city)
     context = {'city_form': city_form, 'city': city}
     return render(req, 'cities/edit.html', context)
-
-
-def posts(request):
-    posts = Post.objects.all()
-    context = {'posts': posts}
-    return render(request, 'posts.html', context)
-
-  
-def profile_edit(req, user_id):
-    user = User.objects.get(id=user_id)
-    if req.method == 'POST':
-        userCreation_form = Profile_Form(req.POST, instance=user.id)
-        if userCreation_form.is_valid():
-            userCreation_form.save()
-            return redirect('profile', user_id=user.id)
-
-    userCreation_form = Profile_Form(instance=user)
-    context = {'form': userCreation_form, 'user': user}
-    return render(req, 'userprofile.html', context)
-
-

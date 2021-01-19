@@ -180,4 +180,3 @@ def city_edit(req, city_id):
     city_form = City_Form(instance=city)
     context = {'city_form': city_form, 'city': city}
     return render(req, 'cities/edit.html', context)
-

@@ -183,6 +183,13 @@ def city_edit(req, city_id):
     context = {'city_form': city_form, 'city': city}
     return render(req, 'cities/edit.html', context)
 
+
+def posts(request):
+    posts = Post.objects.all()
+    context = {'posts': posts}
+    return render(request, 'posts.html', context)
+
+  
 def profile_edit(req, user_id):
     user = User.objects.get(id=user_id)
     if req.method == 'POST':
@@ -194,4 +201,5 @@ def profile_edit(req, user_id):
     userCreation_form = Profile_Form(instance=user)
     context = {'form': userCreation_form, 'user': user}
     return render(req, 'userprofile.html', context)
+
 

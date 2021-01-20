@@ -158,7 +158,8 @@ def post(req, post_id):
 def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     post_form = Profile_Form(instance=post)
-    context = {'post': post, 'post_form': post_form}
+    edit_form = Post_Form(instance=post)
+    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form}
     return render(request, 'post.html', context)
 
 
@@ -172,7 +173,7 @@ def post_edit(req, post_id):
             return redirect('profile')
 
     edit_form = Post_Form(instance=post)
-    context = {'post_form': edit_form, 'post': post}
+    context = {'edit_form': edit_form, 'post': post}
     return render(req, 'post.html', context)
 
 

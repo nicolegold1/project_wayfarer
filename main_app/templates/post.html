@@ -19,7 +19,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          <h1 class="city_title">Create a New Post</h1>
+          <h1 class="city_title">Edit Post</h1>
         </h5>
         <button
                 type="button"
@@ -33,7 +33,7 @@
         <div class="profilePageContainer">
           <div class="card mb-3" id="postCard" style="max-width: 540px">
             <form action="{% url 'post_edit' post.id %}" method="POST">
-              {%csrf_token %} {{ post_form.as_p }}
+              {%csrf_token %} {{ edit_form.as_p }}
               <input class="btn btn-primary" type="submit" value="Edit post" />
             </form>
           </div>
@@ -87,6 +87,7 @@
       <p class="card-text">{{ post.description }}</p>
 
       <div class="row">
+      {% comment %} <div class="modal-footer"> {% endcomment %}
         <div class="col-4 postCol">
           <a
                   href="{% url 'all_posts' %}"
@@ -118,6 +119,7 @@
           </button>
         </div>
       </div>
+      {% comment %} </div> {% endcomment %}
     </div>
   </div>
 </div>

@@ -20,7 +20,7 @@
 }
 
 html body {
-  background-color: #f4f7ed;
+  background-color: var(--main-color);
 }
 
 .cardATag {
@@ -29,7 +29,7 @@ html body {
 }
 
 .navbar a {
-  color: #86ee60;
+  color: var(--secondary-color);
 }
 .carousel .carousel-item {
   height: 550px !important;
@@ -45,7 +45,7 @@ html body {
 }
 
 .navbar {
-  background-color: #2b3752;
+  background-color: var(--fourth-color);
 }
 
 .mainPageTitle {

@@ -183,7 +183,12 @@ def posts(request):
     return render(request, 'posts.html', context)
 
 
+def post_delete(req, post_id):
+    Post.objects.get(id=post_id).delete()
+    return redirect('all_posts')
+
 # ===========================City pages ==========================
+
 
 @login_required
 def city(req):

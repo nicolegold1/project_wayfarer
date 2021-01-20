@@ -112,6 +112,7 @@ def profile(req):
                'post_form': post_form, 'profile': profile, 'edit_form': edit_form}
     return render(req, 'profile.html', context)
 
+
 def profile_show(req, profile_id, city_id):
     if req.method == 'POST':
         form = Post_Form(req.POST)
@@ -190,7 +191,7 @@ def post(req, post_id):
     #     username_form = request.POST['username']
     post_form = Profile_Form(instance=post)
     edit_form = Post_Form(instance=post)
-    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form}
+    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form, }
     return render(req, 'post.html', context)
 
 
@@ -218,10 +219,12 @@ def post_edit(req, post_id):
 
 
 @login_required
-def posts(request):
+def posts(req):
     posts = Post.objects.all()
-    context = {'posts': posts}
-    return render(request, 'posts.html', context)
+    cities = City.objects.filter(user=req.user)
+    profile = Profile.objects.get(user=req.user)
+    context = {'posts': posts, 'cities': cities, 'profile': profile}
+    return render(req, 'posts.html', context)
 
 
 def post_delete(req, post_id):
@@ -266,8 +269,6 @@ def city_detail(req, city_id):
     context = {'city': city, 'city_form': city_form,
                'post_form': post_form, 'posts': posts, 'profile': profile}
     return render(req, 'cities/detail.html', context)
-
-
 
 
 @login_required

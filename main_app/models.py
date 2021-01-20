@@ -1,5 +1,3 @@
-
-from django.contrib.auth import get_user
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 from django.db import models
@@ -7,7 +5,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Create your models here.
 from account.models import Account
-
+# modify the urls/ slugs
+from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 # posts = models.ManyToManyField(Post, blank=True)
 # cities = models.ManyToManyField(City)
@@ -25,7 +25,6 @@ class City(models.Model):
     flags = models.CharField(max_length=200)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     """ posts = models.ManyToManyField(Post, blank=True)  """
-
     def __str__(self):
         return self.name
 

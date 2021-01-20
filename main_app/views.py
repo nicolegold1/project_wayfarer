@@ -71,7 +71,7 @@ def logout(request):
 
 # ===================== Profile =========================
 
-@login_required
+@login_required(login_url='/profile/')
 def profile(req):
     # user = User.objects.get(user_id=req.user_id)
     # user.save()
@@ -104,7 +104,7 @@ def profile(req):
     return render(req, 'profile.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def profile_detail(req, profile_id):
     user = Profile.objects.get(id=profile_id)
     if req.method == 'POST':
@@ -117,7 +117,7 @@ def profile_detail(req, profile_id):
     return render(req, 'profile_detail.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def profile_edit(req, profile_id):
     profile = Profile.objects.get(id=profile_id)
     if req.method == 'POST':
@@ -133,7 +133,7 @@ def profile_edit(req, profile_id):
 
 # ===========================Posts pages ==========================
 
-@login_required
+@login_required(login_url='/profile/')
 def post(req, post_id):
     post = Post.objects.get(id=post_id)
     # if request.method == "POST":
@@ -144,14 +144,14 @@ def post(req, post_id):
     return render(req, 'post.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     context = {'post': post}
     return render(request, 'post.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def posts(request):
     posts = Post.objects.all()
     context = {'posts': posts}
@@ -169,7 +169,7 @@ def posts(request):
 
 # ===========================City pages ==========================
 
-@login_required
+@login_required(login_url='/profile/')
 def city(req):
     # create
     if req.method == 'POST':
@@ -184,7 +184,7 @@ def city(req):
     return render(req, 'cities/index.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def city_detail(req, city_id):
     # create
     if req.method == 'POST':

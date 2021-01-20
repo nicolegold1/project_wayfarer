@@ -150,7 +150,8 @@ def post(req, post_id):
     #     content = request.POST['content']
     #     username_form = request.POST['username']
     post_form = Profile_Form(instance=post)
-    context = {'post': post, 'post_form': post_form}
+    edit_form = Post_Form(instance=post)
+    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form}
     return render(req, 'post.html', context)
 
 

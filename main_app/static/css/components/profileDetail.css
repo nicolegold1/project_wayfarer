@@ -1,0 +1,10 @@
+.ProfileDetailContainer {
+  width: 100vw;
+  position: absolute;
+  text-align: center;
+}
+
+.innerContainer {
+  width: 60%;
+  margin: auto;
+}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %} {% comment %} This page is now
+unused as you can edit profile in profile page {% endcomment %}
+<h1>Edit Profile</h1>
+
+{% if error_message %}
+<p class="red-text">{{error_message}}</p>
+{% endif %}
+
+<form method="POST" action="{% url 'profile_edit' user.id %}">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" class="btn" value="edit" />
+</form>
+
+{% endblock %}

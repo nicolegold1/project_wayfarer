@@ -54,8 +54,10 @@ class Account(AbstractBaseUser):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     avatar = models.URLField(max_length=40)
-    # city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True)
-    # post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
+    # city = models.ForeignKey(
+    #     City, on_delete=models.CASCADE, null=True)
+    # post = models.ForeignKey(
+    #     Post, on_delete=models.CASCADE, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']

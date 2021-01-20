@@ -1,15 +1,55 @@
-/* all */
-:root {
-  --main-color: #f4f7ed;
-  --secondary-color: #86ee60;
-  --third-color: #2e6e65;
-  --fourth-color: #2b3752;
-}
-
 .cityFlagDetail {
-  width: 250px;
+  width: 250px !important;
+  margin: 3% 0 0 0;
 }
 
 .cityDetailContainer {
+  width: 100vw;
   text-align: center;
+}
+
+.cityBtn {
+  width: 130px;
+}
+
+#cityDetailCard {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  width: 80%;
+}
+
+#cityDetailCard:hover {
+  box-shadow: 0.5px 0.5px;
+}
+
+.cityBtn:hover {
+  animation-name: pulse;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.cityDetailPost {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  width: 80%;
+  min-width: 80%;
+}
+
+.containerDetail {
+  width: 100vw;
+  text-align: center;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.85);
+  }
+  to {
+    transform: scale(1);
+  }
 }

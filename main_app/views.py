@@ -217,8 +217,8 @@ def city_detail(req, city_id):
             return redirect('city_index')
     # posts of the city
     posts = Post.objects.filter(city_id=city_id)
-    post_form = Post_Form()
     city = City.objects.get(id=city_id)
+    post_form = Post_Form(initial = {'city': city_id, 'title': "Enter Your Title Here!", 'description': "Give us a description about your post"})
     city_form = City_Form()
     # profile
     profile = Profile.objects.all()

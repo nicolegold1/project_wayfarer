@@ -112,6 +112,45 @@ def profile(req):
                'post_form': post_form, 'profile': profile, 'edit_form': edit_form}
     return render(req, 'profile.html', context)
 
+def profile_show(req, profile_id, city_id):
+    if req.method == 'POST':
+        form = Post_Form(req.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.user = req.user
+            new_post.save()
+            return redirect('profile')
+
+    if req.method == 'POST':
+        city_form = City_Form(req.POST)
+        if city_form.is_valid():
+            new_city = city_form.save(commit=False)
+            new_city.user = req.user
+            new_city.save()
+            return redirect('profile')
+
+    city = City.objects.get(id=city_id)
+    # posts The users post
+    posts = Post.objects.filter(city=city_id)
+    # all citys
+    cities = City.objects.filter(user=req.user)
+    # profile
+    profile = Profile.objects.get(user=req.user)
+    post_form = Post_Form()
+    city_form = City_Form()
+
+    if req.method == 'POST':
+        edit_form = Profile_Form(req.POST, instance=profile)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile')
+
+    edit_form = Profile_Form(instance=profile)
+
+    context = {'city': city, 'city_form': city_form, 'cities': cities, 'posts': posts,
+               'post_form': post_form, 'profile': profile, 'edit_form': edit_form}
+    return render(req, 'profile_show.html', context)
+
 
 @login_required
 def profile_detail(req, profile_id):
@@ -227,6 +266,8 @@ def city_detail(req, city_id):
     context = {'city': city, 'city_form': city_form,
                'post_form': post_form, 'posts': posts, 'profile': profile}
     return render(req, 'cities/detail.html', context)
+
+
 
 
 @login_required

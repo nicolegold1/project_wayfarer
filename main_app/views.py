@@ -99,8 +99,17 @@ def profile(req):
     profile = Profile.objects.get(user=req.user)
     post_form = Post_Form()
     city_form = City_Form()
+
+    if req.method == 'POST':
+        edit_form = Profile_Form(req.POST, instance=profile)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile')
+
+    edit_form = Profile_Form(instance=profile)
+
     context = {'city': city, 'city_form': city_form, 'cities': cities, 'posts': posts,
-               'post_form': post_form, 'profile': profile}
+               'post_form': post_form, 'profile': profile, 'edit_form': edit_form}
     return render(req, 'profile.html', context)
 
 
@@ -140,32 +149,44 @@ def post(req, post_id):
     #     title = request.POST['title']
     #     content = request.POST['content']
     #     username_form = request.POST['username']
-    context = {'post': post}
+    post_form = Profile_Form(instance=post)
+    context = {'post': post, 'post_form': post_form}
     return render(req, 'post.html', context)
 
 
 @login_required(login_url='/profile/')
 def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
-    context = {'post': post}
+    post_form = Profile_Form(instance=post)
+    edit_form = Post_Form(instance=post)
+    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form}
     return render(request, 'post.html', context)
 
 
 @login_required(login_url='/profile/')
+def post_edit(req, post_id):
+    post = Post.objects.get(id=post_id)
+    if req.method == 'POST':
+        edit_form = Post_Form(req.POST, instance=post)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile')
+
+    edit_form = Post_Form(instance=post)
+    context = {'edit_form': edit_form, 'post': post}
+    return render(req, 'post.html', context)
+
+
+@login_required
 def posts(request):
     posts = Post.objects.all()
     context = {'posts': posts}
     return render(request, 'posts.html', context)
 
 
-""" def post_create(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save()
-            return redirect('profile')
- """
-
+def post_delete(req, post_id):
+    Post.objects.get(id=post_id).delete()
+    return redirect('all_posts')
 
 # ===========================City pages ==========================
 
@@ -179,8 +200,8 @@ def city(req):
             new_city.user = req.user
             new_city.save()
             return redirect('profile')
-    city_form = City_Form()
-    context = {'city': city, 'city_form': city_form}
+
+    context = {'city': city, 'posts': posts}
     return render(req, 'cities/index.html', context)
 
 
@@ -194,10 +215,15 @@ def city_detail(req, city_id):
             new_city.user = req.user
             new_city.save()
             return redirect('city_index')
-
+    # posts of the city
+    posts = Post.objects.filter(city_id=city_id)
+    post_form = Post_Form()
     city = City.objects.get(id=city_id)
     city_form = City_Form()
-    context = {'city': city, 'city_form': city_form}
+    # profile
+    profile = Profile.objects.all()
+    context = {'city': city, 'city_form': city_form,
+               'post_form': post_form, 'posts': posts, 'profile': profile}
     return render(req, 'cities/detail.html', context)
 
 

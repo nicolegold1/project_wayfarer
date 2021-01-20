@@ -6,14 +6,12 @@
 @import "./components/cityDetails.css";
 /* Post All */
 @import "./components/postsAll.css";
+/* Post details*/
+@import "./components/post_detail.css";
 
 /* COLOR SCHEME */
-/* Dark Blue: #2b3752 */
-/* Light Blue/Greenish: #2e6e65 */
-/* Green: #86ee60 */
-/* Light Grey/Off White: #f4f7ed */
-
-/* all */ 
+/* Dark Blue: #2b3752 */ /* Light Blue/Greenish: #2e6e65 */
+/* Green: #86ee60 */ /* Light Grey/Off White: #f4f7ed */ /* all */
 :root {
   --main-color: #f4f7ed;
   --secondary-color: #86ee60;
@@ -22,7 +20,7 @@
 }
 
 html body {
-  background-color: #f4f7ed;
+  background-color: var(--main-color);
 }
 
 .cardATag {
@@ -31,7 +29,7 @@ html body {
 }
 
 .navbar a {
-  color: #86ee60;
+  color: var(--secondary-color);
 }
 .carousel .carousel-item {
   height: 550px !important;
@@ -47,7 +45,7 @@ html body {
 }
 
 .navbar {
-  background-color: #2b3752;
+  background-color: var(--fourth-color);
 }
 
 .mainPageTitle {
@@ -86,7 +84,7 @@ html body {
 
 .postShowContent {
   text-align: center;
-}    
+}
 
 /* .single-post {
   text-align: center;

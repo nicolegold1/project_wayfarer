@@ -154,6 +154,7 @@ def city(req):
     return render(req, 'cities/index.html', context)
 
 
+
 def city_detail(req, city_id):
     # create
     if req.method == 'POST':
@@ -168,6 +169,8 @@ def city_detail(req, city_id):
     city_form = City_Form()
     context = {'city': city, 'city_form': city_form}
     return render(req, 'cities/detail.html', context)
+
+
 
 
 @login_required
@@ -195,3 +198,12 @@ def profile_edit(req, user_id):
     context = {'form': userCreation_form, 'user': user}
     return render(req, 'userprofile.html', context)
 
+
+
+
+
+<ul>
+{% for sanfranciso in sanfrancisco_list %}
+    <li>{{sanfrancisco.post}}</li>
+{% endfor %}
+</ul>

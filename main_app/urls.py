@@ -17,6 +17,8 @@ urlpatterns = [
     # Post Routes
     # path('city/<int:city_id>/delete', views.city_delete, name='city_delete'),
     # path('post/', views.posts_index, name='posts_index'),
+    path('posts/', views.posts, name='all_posts'),
     path('posts/<int:post_id>/', views.post, name='posts_detail'),
-    path('posts/', views.posts, name='all_posts')
+    path('posts/<int:post_id>/edit/', views.post_edit, name='post_edit'),
+    path('posts/<int:post_id>/delete/', views.post_delete, name='post_delete')
 ]

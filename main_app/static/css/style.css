@@ -82,19 +82,6 @@ html body {
   text-align: center;
 }    
 
-/* .single-post {
-  text-align: center;
-} */
-
-.cityListRow {
-  /* background: #2e6e65; */
-  border: solid 3px #2b3752;
-}
-
-.selected_city {
-  border: solid 3px #2b3752;
-}
-
 /* COLOR SCHEME */
 /* Dark Blue: #2b3752 */
 /* Light Blue/Greenish: #2e6e65 */

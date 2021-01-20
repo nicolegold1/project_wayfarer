@@ -112,6 +112,45 @@ def profile(req):
                'post_form': post_form, 'profile': profile, 'edit_form': edit_form}
     return render(req, 'profile.html', context)
 
+def profile_show(req, profile_id, city_id):
+    if req.method == 'POST':
+        form = Post_Form(req.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.user = req.user
+            new_post.save()
+            return redirect('profile')
+
+    if req.method == 'POST':
+        city_form = City_Form(req.POST)
+        if city_form.is_valid():
+            new_city = city_form.save(commit=False)
+            new_city.user = req.user
+            new_city.save()
+            return redirect('profile')
+
+    city = City.objects.get(id=city_id)
+    # posts The users post
+    posts = Post.objects.filter(city=city_id)
+    # all citys
+    cities = City.objects.filter(user=req.user)
+    # profile
+    profile = Profile.objects.get(user=req.user)
+    post_form = Post_Form()
+    city_form = City_Form()
+
+    if req.method == 'POST':
+        edit_form = Profile_Form(req.POST, instance=profile)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile')
+
+    edit_form = Profile_Form(instance=profile)
+
+    context = {'city': city, 'city_form': city_form, 'cities': cities, 'posts': posts,
+               'post_form': post_form, 'profile': profile, 'edit_form': edit_form}
+    return render(req, 'profile_show.html', context)
+
 
 @login_required
 def profile_detail(req, profile_id):
@@ -243,28 +282,3 @@ def city_edit(req, city_id):
     city_form = City_Form(instance=city)
     context = {'city_form': city_form, 'city': city}
     return render(req, 'cities/edit.html', context)
-<<<<<<< HEAD
-
-def profile_edit(req, user_id):
-    user = User.objects.get(id=user_id)
-    if req.method == 'POST':
-        userCreation_form = Profile_Form(req.POST, instance=user.id)
-        if userCreation_form.is_valid():
-            userCreation_form.save()
-            return redirect('profile', user_id=user.id)
-
-    userCreation_form = Profile_Form(instance=user)
-    context = {'form': userCreation_form, 'user': user}
-    return render(req, 'userprofile.html', context)
-
-
-
-
-
-<ul>
-{% for sanfranciso in sanfrancisco_list %}
-    <li>{{sanfrancisco.post}}</li>
-{% endfor %}
-</ul>
-=======
->>>>>>> origin/submaster

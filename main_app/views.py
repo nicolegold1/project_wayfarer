@@ -247,7 +247,7 @@ def city(req):
 
 
 @login_required
-def city_detail(req, city_id):
+def city_detail(req, slug):
     # create
     if req.method == 'POST':
         city_form = City_Form(req.POST)
@@ -256,11 +256,13 @@ def city_detail(req, city_id):
             new_city.user = req.user
             new_city.save()
             return redirect('city_index')
-    # posts of the city
-    posts = Post.objects.filter(city_id=city_id)
+    inner_qs = City.objects.filter(name__contains=slug)
+    posts = Post.objects.filter(city__in=inner_qs)
     post_form = Post_Form()
-    city = City.objects.get(id=city_id)
+    city = City.objects.get(name=slug)
     city_form = City_Form()
+    # posts of the city
+    #posts = Post.objects.filter(city.pk=slug)
     # profile
     profile = Profile.objects.all()
     context = {'city': city, 'city_form': city_form,

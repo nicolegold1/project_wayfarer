@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Create your models here.
 from account.models import Account
+from django.urls import reverse
 
 
 # posts = models.ManyToManyField(Post, blank=True)
@@ -25,7 +26,24 @@ class City(models.Model):
     flags = models.CharField(max_length=200)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     """ posts = models.ManyToManyField(Post, blank=True)  """
+    slug = models.SlugField(default='', editable=False, max_length=20, null=True)
 
+
+    def get_absolute_url(self):
+        kwargs = {
+            'city_id': self.id,
+            'slug': self.slug
+        }
+
+        return reverse("city_detail", kwargs=kwargs)
+
+    def save(self, *args, **kwargs):
+        value = self.name
+        self.slug = slugify(value, allow_unicode=True)
+        super().save(*args, **kwargs)
+
+    
+    
     def __str__(self):
         return self.name
 

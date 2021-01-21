@@ -82,8 +82,19 @@ html body {
   text-align: center;
 }    
 
-/* COLOR SCHEME */
-/* Dark Blue: #2b3752 */
-/* Light Blue/Greenish: #2e6e65 */
-/* Green: #86ee60 */
-/* Light Grey/Off White: #f4f7ed */
+.btn-primary:hover {
+  color: var(--main-color) !important;
+  background-color: var(--bs-blue) !important;
+  border-color: var(--fourth-color) !important;
+}
+
+.city-btn {
+  border-color: var(--secondary-color) !important;
+  border: 2px solid;
+}
+
+#cityListRow {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}

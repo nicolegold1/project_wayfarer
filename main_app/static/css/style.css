@@ -89,3 +89,25 @@ html body {
 /* .single-post {
   text-align: center;
 } */
+
+.btn-primary {
+  color: var(--main-color) !important;
+  background-color: var(--fourth-color) !important;
+  border-color: var(--fourth-color) !important;
+}
+
+.btn-primary:hover {
+  color: var(--main-color) !important;
+  background-color: var(--bs-blue) !important;
+  border-color: var(--fourth-color) !important;
+}
+
+.city-btn {
+  border-color: var(--secondary-color) !important;
+  border: 2px solid;
+}
+
+.cityListRow {
+  position: sticky;
+  top: 0;
+}

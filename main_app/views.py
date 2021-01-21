@@ -112,6 +112,7 @@ def profile(req):
                'post_form': post_form, 'profile': profile, 'edit_form': edit_form}
     return render(req, 'profile.html', context)
 
+
 def profile_show(req, profile_id, city_id):
     if req.method == 'POST':
         form = Post_Form(req.POST)
@@ -190,7 +191,7 @@ def post(req, post_id):
     #     username_form = request.POST['username']
     post_form = Profile_Form(instance=post)
     edit_form = Post_Form(instance=post)
-    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form}
+    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form, }
     return render(req, 'post.html', context)
 
 
@@ -218,10 +219,12 @@ def post_edit(req, post_id):
 
 
 @login_required
-def posts(request):
+def posts(req):
     posts = Post.objects.all()
-    context = {'posts': posts}
-    return render(request, 'posts.html', context)
+    cities = City.objects.filter(user=req.user)
+    profile = Profile.objects.get(user=req.user)
+    context = {'posts': posts, 'cities': cities, 'profile': profile}
+    return render(req, 'posts.html', context)
 
 
 def post_delete(req, post_id):
@@ -245,8 +248,8 @@ def city(req):
     return render(req, 'cities/index.html', context)
 
 
-@login_required(login_url='/profile/')
-def city_detail(req, city_id):
+@login_required
+def city_detail(req, slug):
     # create
     if req.method == 'POST':
         city_form = City_Form(req.POST)
@@ -255,18 +258,18 @@ def city_detail(req, city_id):
             new_city.user = req.user
             new_city.save()
             return redirect('city_index')
-    # posts of the city
-    posts = Post.objects.filter(city_id=city_id)
-    city = City.objects.get(id=city_id)
-    post_form = Post_Form(initial = {'city': city_id, 'title': "Enter Your Title Here!", 'description': "Give us a description about your post"})
+    inner_qs = City.objects.filter(name__contains=slug)
+    posts = Post.objects.filter(city__in=inner_qs)
+    post_form = Post_Form()
+    city = City.objects.get(name=slug)
     city_form = City_Form()
+    # posts of the city
+    #posts = Post.objects.filter(city.pk=slug)
     # profile
     profile = Profile.objects.all()
     context = {'city': city, 'city_form': city_form,
                'post_form': post_form, 'posts': posts, 'profile': profile}
     return render(req, 'cities/detail.html', context)
-
-
 
 
 @login_required

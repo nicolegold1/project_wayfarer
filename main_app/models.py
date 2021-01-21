@@ -21,13 +21,13 @@ from django.urls import reverse
 
 
 class City(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
     description = models.CharField(max_length=100)
     flags = models.CharField(max_length=200)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     """ posts = models.ManyToManyField(Post, blank=True)  """
-    slug = models.SlugField(default='', editable=False, max_length=20, null=False)
-
+    slug = models.SlugField(default='', editable=False,
+                            max_length=20, null=True)
 
     def get_absolute_url(self):
         kwargs = {
@@ -42,15 +42,13 @@ class City(models.Model):
         self.slug = slugify(value, allow_unicode=True)
         super().save(*args, **kwargs)
 
-    
-    
     def __str__(self):
         return self.name
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=20)
-    description = models.TextField(max_length=100)
+    title = models.CharField(max_length=200)
+    description = models.TextField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)

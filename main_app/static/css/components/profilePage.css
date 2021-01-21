@@ -4,6 +4,10 @@ a {
   text-decoration: none;
 }
 
+/* body { */
+/* background-color: var(--third-color) !important; */
+/* } */
+
 .profilePageContainer {
   margin: 1%;
 }
@@ -17,9 +21,17 @@ a {
   word-wrap: break-word;
   background-color: var(--main-color);
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 1px solid var(--third-color) !important;
   border-radius: 0.25rem;
   height: 100vh;
+}
+
+.profile-city-list {
+  border: 1px solid var(--fourth-color) !important;
+}
+
+.city_title_dark {
+  color: var(--main-color);
 }
 
 .cardCityImage {
@@ -54,9 +66,9 @@ a {
   margin: 1%;
 }
 
-.card {
-  /* max-height: 190px; */
-}
+/* .card { */
+/* max-height: 190px; */
+/* } */
 
 .rightPostProfile {
   position: absolute;
@@ -81,10 +93,10 @@ a {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: var(--main-color);
+  background-color: var(--fourth-color);
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border: 1px solid var(--third-color) !important;
+  border-radius: 0.25rem !important;
   height: 100vh;
 }
 
@@ -92,6 +104,11 @@ a {
   margin: 2%;
   object-fit: cover;
   width: 100%;
+}
+
+.profilePost {
+  border-bottom: 1px solid var(--third-color);
+  margin: 0 !important;
 }
 
 .user_information {

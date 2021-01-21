@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.db.models import signals
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 from .models import City, Profile, Post
@@ -34,19 +34,18 @@ def homepage(request):
             if add_form.is_valid():
                 user = add_form.save()
                 login(request, user)
-                # email_subject = "no-reply@wayfarer.com"
-                # email_body = " Welcome to the best site for travel"
-                # from_email = settings.EMAIL_HOST_USER
-                # new_user_email = user.email
-                # to_list = [new_user_email, from_email]
-                # send_mail(
-                #     email_subject,
-                #     email_body,
-                #     from_email,
-                #     to_list,
-                #     fail_silently=False,
-                # )
-                # send_mail()
+                email_subject = "Welcome to Wayfarer"
+                email_body = "You have successfully signed up for an account!"
+                from_email = settings.EMAIL_HOST_USER
+                new_user_email = user.email
+                to_list = [new_user_email]
+                send_mail(
+                    email_subject,
+                    email_body,
+                    from_email,
+                    to_list,
+                    fail_silently=False,
+                )
                 return redirect('profile')
             else:
                 error_message = "Invalid Sign Up - Please Try Again"
@@ -81,7 +80,7 @@ def profile(req):
             new_post = form.save(commit=False)
             new_post.user = req.user
             new_post.save()
-            return redirect('profile')
+            return redirect(req.path_info)
 
     if req.method == 'POST':
         city_form = City_Form(req.POST)
@@ -89,7 +88,7 @@ def profile(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect('profile')
+            return redirect(req.path_info)
 
     # posts The users post
     posts = Post.objects.filter(user=req.user)
@@ -99,9 +98,58 @@ def profile(req):
     profile = Profile.objects.get(user=req.user)
     post_form = Post_Form()
     city_form = City_Form()
+
+    if req.method == 'POST':
+        edit_form = Profile_Form(req.POST, instance=profile)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile')
+
+    edit_form = Profile_Form(instance=profile)
+
     context = {'city': city, 'city_form': city_form, 'cities': cities, 'posts': posts,
-               'post_form': post_form, 'profile': profile}
+               'post_form': post_form, 'profile': profile, 'edit_form': edit_form}
     return render(req, 'profile.html', context)
+
+
+def profile_show(req, profile_id, city_id):
+    if req.method == 'POST':
+        form = Post_Form(req.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.user = req.user
+            new_post.save()
+            return redirect(req.get_full_path())
+
+    if req.method == 'POST':
+        city_form = City_Form(req.POST)
+        if city_form.is_valid():
+            new_city = city_form.save(commit=False)
+            new_city.user = req.user
+            new_city.save()
+            return redirect(req.get_full_path())
+
+    city = City.objects.get(id=city_id)
+    # posts The users post
+    posts = Post.objects.filter(city=city_id)
+    # all citys
+    cities = City.objects.filter(user=req.user)
+    # profile
+    profile = Profile.objects.get(user=req.user)
+    post_form = Post_Form()
+    city_form = City_Form()
+
+    if req.method == 'POST':
+        edit_form = Profile_Form(req.POST, instance=profile)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile')
+
+    edit_form = Profile_Form(instance=profile)
+
+    context = {'city': city, 'city_form': city_form, 'cities': cities, 'posts': posts,
+               'post_form': post_form, 'profile': profile, 'edit_form': edit_form}
+    return render(req, 'profile_show.html', context)
 
 
 @login_required
@@ -140,34 +188,52 @@ def post(req, post_id):
     #     title = request.POST['title']
     #     content = request.POST['content']
     #     username_form = request.POST['username']
-    context = {'post': post}
+    post_form = Profile_Form(instance=post)
+    edit_form = Post_Form(instance=post)
+    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form, }
     return render(req, 'post.html', context)
 
 
 @login_required
 def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
-    context = {'post': post}
+    post_form = Profile_Form(instance=post)
+    edit_form = Post_Form(instance=post)
+    cities = City.objects.all()
+    context = {'post': post, 'post_form': post_form,
+               'edit_form': edit_form, 'cities': cities}
     return render(request, 'post.html', context)
 
 
 @login_required
-def posts(request):
+def post_edit(req, post_id):
+    post = Post.objects.get(id=post_id)
+    if req.method == 'POST':
+        edit_form = Post_Form(req.POST, instance=post)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect(req.path_info)
+
+    edit_form = Post_Form(instance=post)
+    context = {'edit_form': edit_form, 'post': post}
+    return render(req, 'post.html', context)
+
+
+@login_required
+def posts(req):
     posts = Post.objects.all()
-    context = {'posts': posts}
-    return render(request, 'posts.html', context)
+    cities = City.objects.filter(user=req.user)
+    profile = Profile.objects.get(user=req.user)
+    context = {'posts': posts, 'cities': cities, 'profile': profile}
+    return render(req, 'posts.html', context)
 
 
-""" def post_create(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save()
-            return redirect('profile')
- """
-
+def post_delete(req, post_id):
+    Post.objects.get(id=post_id).delete()
+    return redirect('all_posts')
 
 # ===========================City pages ==========================
+
 
 @login_required
 def city(req):
@@ -178,14 +244,14 @@ def city(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect('profile')
-    city_form = City_Form()
-    context = {'city': city, 'city_form': city_form}
+            return redirect(req.path)
+
+    context = {'city': city, 'posts': posts}
     return render(req, 'cities/index.html', context)
 
 
 @login_required
-def city_detail(req, city_id):
+def city_detail(req, slug):
     # create
     if req.method == 'POST':
         city_form = City_Form(req.POST)
@@ -193,22 +259,30 @@ def city_detail(req, city_id):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect('city_index')
-
-    city = City.objects.get(id=city_id)
+            return redirect(req.path_info)
+    cities = City.objects.all()
+    inner_qs = City.objects.filter(name__contains=slug)
+    posts = Post.objects.filter(city__in=inner_qs)
+    post_form = Post_Form()
+    city = City.objects.get(name=slug)
     city_form = City_Form()
-    context = {'city': city, 'city_form': city_form}
+    # posts of the city
+    # posts = Post.objects.filter(city.pk=slug)
+    # profile
+    profile = Profile.objects.all()
+    context = {'city': city, 'city_form': city_form,
+               'post_form': post_form, 'posts': posts, 'profile': profile, 'cities': cities}
     return render(req, 'cities/detail.html', context)
 
 
 @login_required
-def city_edit(req, city_id):
-    city = City.objects.get(id=city_id)
+def city_edit(req, slug):
+    city = City.objects.get(name=slug)
     if req.method == 'POST':
         city_form = City_Form(req.POST, instance=city)
         if city_form.is_valid():
             city_form.save()
-            return redirect('city_detail', city_id=city.id)
+            return redirect('city_detail', city)
 
     city_form = City_Form(instance=city)
     context = {'city_form': city_form, 'city': city}

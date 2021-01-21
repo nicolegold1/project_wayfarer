@@ -1,0 +1,8 @@
+.postCol {
+  display: flex;
+  justify-content: center;
+}
+
+.card-header {
+  padding: 1rem !important;
+}

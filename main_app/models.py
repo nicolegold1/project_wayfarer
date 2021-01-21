@@ -1,12 +1,12 @@
-
-from django.contrib.auth import get_user
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.template.defaultfilters import slugify
 # Create your models here.
 from account.models import Account
+from django.urls import reverse
 
 
 # posts = models.ManyToManyField(Post, blank=True)
@@ -20,19 +20,34 @@ from account.models import Account
 
 
 class City(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
     description = models.CharField(max_length=100)
     flags = models.CharField(max_length=200)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     """ posts = models.ManyToManyField(Post, blank=True)  """
+    slug = models.SlugField(default='', editable=False,
+                            max_length=20, null=True)
+
+    def get_absolute_url(self):
+        kwargs = {
+            'city_id': self.id,
+            'slug': self.slug
+        }
+
+        return reverse("city_detail", kwargs=kwargs)
+
+    def save(self, *args, **kwargs):
+        value = self.name
+        self.slug = slugify(value)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=20)
-    description = models.TextField(max_length=100)
+    title = models.CharField(max_length=200)
+    description = models.TextField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)

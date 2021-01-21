@@ -26,7 +26,7 @@ class City(models.Model):
     flags = models.CharField(max_length=200)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     """ posts = models.ManyToManyField(Post, blank=True)  """
-    slug = models.SlugField(default='', editable=False, max_length=20, null=True)
+    slug = models.SlugField(default='', editable=False, max_length=20, null=False)
 
 
     def get_absolute_url(self):

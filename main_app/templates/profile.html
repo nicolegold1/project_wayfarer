@@ -26,7 +26,6 @@
                 aria-label="Close"
         ></button>
       </div>
-      {% comment %} modal {% endcomment %}
       <div class="modal-body">
         <div class="profilePageContainer">
           <div class="card mb-3" id="postCard" style="max-width: 540px">
@@ -67,7 +66,6 @@
                 aria-label="Close"
         ></button>
       </div>
-      {% comment %} modal {% endcomment %}
       <div class="modal-body">
         <div class="profilePageContainer">
           <div class="card mb-3" id="postCard" style="max-width: 540px">
@@ -88,11 +86,88 @@
         </div>
       </div>
     </div>
-    {% comment %} end of modal body {% endcomment %}
   </div>
 </div>
-</div>
-</div>
+    {% comment %} end of modal body {% endcomment %}
+
+{% comment %} Post Select Model {% endcomment %}
+<!-- Post Select Modal -->
+{% comment %} <div
+        class="modal fade"
+        id="postSelectModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+> {% endcomment %}
+  {% comment %} <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <h1 class="city_title">Selected Post</h1>
+        </h5>
+        <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="profilePageContainer">
+<div class="postCard">
+  <div class="card" style="max-width: 840px; min-width: 840px;">
+    <div class="card-header">
+      <h5 class="card-title postHeader">Title: {{ post.title }}</h5>
+      <p class="text-muted postHeader">Posted on: {{ post.created_at }}</p>
+    </div>
+    <div class="card-body">
+      <p>Author: {{ post.user.username }}</p>
+      <p class="card-text">{{ post.description }}</p>
+
+      <div class="row">
+      {% comment %} <div class="modal-footer"> {% endcomment %}
+        {% comment %} <div class="col-4 postCol">
+          <a
+                  href="{% url 'all_posts' %}"
+                  class="btn btn-primary"
+                  style="float: right"
+          > <i class="fa fa-user-circle" aria-hidden="true"></i> Go To All Post
+          </a>
+        </div>
+        <div class="col-4 postCol">
+          <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="add-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#DeleteModal"
+          >
+            <i class="fas fa-trash-alt"></i> Delete</i>
+          </button>
+        </div>
+        <div class="col-4 postCol">
+          <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="add-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#postModal"
+          >
+            <i class="fas fa-edit"></i> Edit Post</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+
+
+
+
+
+
+    {% comment %} start of app body {% endcomment %}
 {% block modalMainPage %} {% endblock %} {% endblock %} {% block content %}
 <div class="profilePageContainer">
   <div class="row">
@@ -157,9 +232,9 @@
 {% comment %} END OF CITY UPDATE {% endcomment %}
       {% comment %} Cities content + posts {% endcomment %}
       <section class="overflow-auto cityScroll">
-        {% for city in cities %} {% if forloop.counter|divisibleby:2 %}
-        <div class="card mb-3" style="max-width: 540px">
-          {% comment %} <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}"> {% endcomment %}
+        {% for city in cities %} 
+        {% comment %} {% if forloop.counter|divisibleby:2 %} {% endcomment %}
+        {% comment %} <div class="card mb-3" style="max-width: 540px">
           <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
             <div class="row g-0">
               <div class="col-md-4">
@@ -176,17 +251,14 @@
               </div>
             </div>
           </a>
-        </div>
-        {% else %}
-        <div class="card mb-3" style="max-width: 540px">
+        </div> {% endcomment %}
+        {% comment %} {% else %} {% endcomment %}
+        <div class="card mb-3 profile-city-list" style="max-width: 540px">
           <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
             <div class="row g-0">
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">{{city.name}}</h5>
-                  <p class="card-text">{{ city.description }}</p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                  <h2 class="card-title">{{city.name}}</h2>
                   </p>
                 </div>
               </div>
@@ -195,8 +267,9 @@
               </div>
             </div>
           </a>
-        </div>
-        {% endif %} {% endfor %} {% comment %} end col {% endcomment %}
+        </div> 
+        {% comment %} {% endif %}  {% endcomment %}
+        {% endfor %} {% comment %} end col {% endcomment %}
       </section>
     </div>
 
@@ -271,9 +344,10 @@
         <div class="posts overflow-auto" id="posts">
           <div></div>
           {% for post in posts %}
-          <a class="cardATag" href="{% url 'posts_detail' post.id %}">
-            {% if forloop.counter|divisibleby:2 %}
-            <div class="card mb-3 postsContainer">
+
+        <a class="cardATag" href="{% url 'posts_detail' post.id %}">
+          {% if forloop.counter|divisibleby:2 %}
+            <div class="card mb-3 postsContainer" data-bs-toggle="modal" data-bs-target="#postSelectModal">
               <div class="row g-0">
                 <div class="col-md-4">
                   <img
@@ -298,7 +372,7 @@
               </div>
             </div>
             {% else %}
-            <div class="card mb-3" style="margin-top:1%">
+            <div class="card mb-3" style="margin-top:1%" data-bs-toggle="modal" data-bs-target="#postSelectModal">
               <div class="row g-0">
                 <div class="col-md-8">
                   <div class="card-body">

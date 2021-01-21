@@ -6,12 +6,8 @@
 @import "./components/cityDetails.css";
 /* Post All */
 @import "./components/postsAll.css";
-/* Post details*/
-@import "./components/post_detail.css";
 
-/* COLOR SCHEME */
-/* Dark Blue: #2b3752 */ /* Light Blue/Greenish: #2e6e65 */
-/* Green: #86ee60 */ /* Light Grey/Off White: #f4f7ed */ /* all */
+/* all */ 
 :root {
   --main-color: #f4f7ed;
   --secondary-color: #86ee60;
@@ -20,7 +16,7 @@
 }
 
 html body {
-  background-color: var(--main-color);
+  background-color: #f4f7ed;
 }
 
 .cardATag {
@@ -29,7 +25,7 @@ html body {
 }
 
 .navbar a {
-  color: var(--secondary-color);
+  color: #86ee60;
 }
 .carousel .carousel-item {
   height: 550px !important;
@@ -45,7 +41,7 @@ html body {
 }
 
 .navbar {
-  background-color: var(--fourth-color);
+  background-color: #2b3752;
 }
 
 .mainPageTitle {
@@ -84,30 +80,10 @@ html body {
 
 .postShowContent {
   text-align: center;
-}
+}    
 
-/* .single-post {
-  text-align: center;
-} */
-
-.btn-primary {
-  color: var(--main-color) !important;
-  background-color: var(--fourth-color) !important;
-  border-color: var(--fourth-color) !important;
-}
-
-.btn-primary:hover {
-  color: var(--main-color) !important;
-  background-color: var(--bs-blue) !important;
-  border-color: var(--fourth-color) !important;
-}
-
-.city-btn {
-  border-color: var(--secondary-color) !important;
-  border: 2px solid;
-}
-
-.cityListRow {
-  position: sticky;
-  top: 0;
-}
+/* COLOR SCHEME */
+/* Dark Blue: #2b3752 */
+/* Light Blue/Greenish: #2e6e65 */
+/* Green: #86ee60 */
+/* Light Grey/Off White: #f4f7ed */

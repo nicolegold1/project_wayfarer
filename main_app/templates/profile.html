@@ -5,13 +5,8 @@
   integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
   crossorigin="anonymous"
 />
-{% comment %} Edit Profile {% endcomment %}
 {% endblock %}
-
-{% block content %}
-
-{% endblock %} {% block modalMainPage %} {% comment %} Edit Profile {%
-endcomment %}
+{% block modalMainPage %}
 <div
   class="modal fade"
   id="profileModal"
@@ -104,10 +99,7 @@ endcomment %}
     </div>
   </div>
 </div>
-{% comment %} end of modal body {% endcomment %} {% comment %} Post Select Model
-{% endcomment %}
-<!-- Post Select Modal -->
-{% comment %}
+
 <div
   class="modal fade"
   id="postSelectModal"
@@ -115,7 +107,6 @@ endcomment %}
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  {% endcomment %} {% comment %}
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -143,8 +134,8 @@ endcomment %}
       <p class="card-text">{{ post.description }}</p>
 
       <div class="row">
-      {% comment %} <div class="modal-footer"> {% endcomment %}
-        {% comment %} <div class="col-4 postCol">
+     <div class="modal-footer"> 
+         <div class="col-4 postCol">
           <a
                   href="{% url 'all_posts' %}"
                   class="btn btn-primary"
@@ -177,7 +168,7 @@ endcomment %}
       </div>
     </div>
   </div>
-</div> {% endcomment %}
+</div> 
 
 
 
@@ -186,7 +177,6 @@ endcomment %}
 
 
     {% comment %} start of app body {% endcomment %}
-{% block modalMainPage %} {% endblock %}  
 <div class="profilePageContainer">
   <div class="row">
     {% comment %} List item Column {% endcomment %}
@@ -225,52 +215,10 @@ endcomment %}
             </div>
           </div>
 
-{% comment %} SECTION: Updated City NavBar Left Vertical {% endcomment %}
 
-{% comment %} the buttons themselves {% endcomment %}
- {% comment %} <div class="d-flex align-items-start">
-  <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-    <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-    <a class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-    <a class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-    <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-  </div> {% endcomment %}
-
-  {% comment %} these are targets of buttons {% endcomment %}
- {% comment %}  <div class="tab-content" id="v-pills-tabContent">
-    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" >Hello</div>
-    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" >No</div>
-    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" >Yes</div>
-    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" > </div>
-  </div>
-</div> {% endcomment %}
-
-
-
-{% comment %} END OF CITY UPDATE {% endcomment %}
-      {% comment %} Cities content + posts {% endcomment %}
+      {% comment %} SECTION: Cities content + posts {% endcomment %}
       <section class="overflow-auto cityScroll">
         {% for city in cities %} 
-        {% comment %} {% if forloop.counter|divisibleby:2 %} {% endcomment %}
-        {% comment %} <div class="card mb-3" style="max-width: 540px">
-          <a class="list-group-item list-group-item-action" href="{% url 'city_detail' city.id %}">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img class="cityListImage" src="{{city.flags}}" alt="..." />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{ city.name }}</h5>
-                  <p class="card-text">{{ city.description }}</p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div> {% endcomment %}
-        {% comment %} {% else %} {% endcomment %}
         <div class="card mb-3 profile-city-list" style="max-width: 540px">
           <a class="list-group-item list-group-item-action" href="{% url 'profile_show' profile.id city.id %}">
             <div class="row g-0">
@@ -301,8 +249,6 @@ endcomment %}
     >
       <div class="selected_city">
         <div class="row">
-          {% comment %} added id = listitem eventuallythat will allow to open
-          seperate city {% endcomment %}
           <div class="col-6" id="list-item-1">
             <div class="cityname">
             {% if profile.city.name|length <= 0 %}
@@ -318,12 +264,10 @@ endcomment %}
               <div class="user">
 
                <p class="username">{{profile.username}}</p>
-                {% comment %} <a href="{% url 'profile_detail' user.id %}"> {% endcomment %}
                 <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
             Edit Profile
             <i class="fas fa-user-cog"></i>
                 </button>
-                {% comment %} </a> {% endcomment %}
                 <p class="userlogin text-muted">
                   Joined: {{user.date_joined.month}}, {{user.date_joined.year}}
           <div class="postCard">
@@ -451,10 +395,7 @@ endcomment %}
 
                   {% comment %} Cities content + posts {% endcomment %}
                   <section class="overflow-auto cityScroll">
-                    {% for city in cities %} {% comment %} {% if
-                    forloop.counter|divisibleby:2 %} {% endcomment %}
-                    <p></p>
-                    {% comment %}
+                    {% for city in cities %} 
                     <div class="card mb-3" style="max-width: 540px">
                       <a
                         class="list-group-item list-group-item-action"
@@ -482,7 +423,7 @@ endcomment %}
                         </div>
                       </a>
                     </div>
-                    {% endcomment %} {% comment %} {% else %} {% endcomment %}
+                    
                     <div
                       class="card mb-3 profile-city-list"
                       style="max-width: 540px"
@@ -507,12 +448,11 @@ endcomment %}
                         </div>
                       </a>
                     </div>
-                    {% comment %} {% endif %} {% endcomment %} {% endfor %}
+                     {% endfor %}
                   </section>
-                  {% comment %} end col {% endcomment %}
+                 
                 </div>
 
-                {% comment %} Selected city Column {% endcomment %}
                 <div
                   class="col-8 scrollspy-example"
                   data-bs-spy="scroll"
@@ -522,8 +462,7 @@ endcomment %}
                 >
                   <div class="selected_city">
                     <div class="row">
-                      {% comment %} added id = listitem eventuallythat will
-                      allow to open seperate city {% endcomment %}
+                      
                       <div class="col-6" id="list-item-1">
                         <div class="cityname">
                           {% if profile.city.name|length <= 0 %}
@@ -535,12 +474,10 @@ endcomment %}
                       </div>
                       <div class="col-6">
                         <div class="user_information">
-                          {% comment %} userinformation {% endcomment %}
+                          
                           <div class="user">
                             <p class="username">{{profile.username}}</p>
-                            {% comment %}
-                            <a href="{% url 'profile_detail' user.id %}">
-                              {% endcomment %}
+                            
                               <button
                                 type="button"
                                 class="btn btn-primary"
@@ -550,9 +487,7 @@ endcomment %}
                                 Edit Profile
                                 <i class="fas fa-user-cog"></i>
                               </button>
-                              {% comment %}
-                            </a>
-                            {% endcomment %}
+                          
                             <p class="userlogin text-muted">
                               Joined: {{user.date_joined.month}},
                               {{user.date_joined.year}}

@@ -107,7 +107,8 @@ html body {
   border: 2px solid;
 }
 
-.cityListRow {
+#cityListRow {
   position: sticky;
   top: 0;
+  z-index: 10;
 }

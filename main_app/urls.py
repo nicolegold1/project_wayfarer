@@ -13,9 +13,10 @@ urlpatterns = [
     path('profile/<int:profile_id>/edit/',
          views.profile_edit, name='profile_edit'),
     # city Routes
-    path('cities/', views.city, name='city_index'),
-    path('cities/<int:city_id>/', views.city_detail, name='city_detail'),
-    path('cities/<int:city_id>/edit/', views.city_edit, name='city_edit'),
+    path('city/', views.city, name='city_index'),
+    path('city/<str:slug>/', views.city_detail, name='city_detail'),
+    path('city/<str:slug>/edit/', views.city_edit, name='city_edit'),
+    # Post Routes
     # path('city/<int:city_id>/delete', views.city_delete, name='city_delete'),
     # Post Routes
     # path('post/', views.posts_index, name='posts_index'),

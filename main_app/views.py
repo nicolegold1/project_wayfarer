@@ -80,7 +80,7 @@ def profile(req):
             new_post = form.save(commit=False)
             new_post.user = req.user
             new_post.save()
-            return redirect('profile')
+            return redirect(req.path_info)
 
     if req.method == 'POST':
         city_form = City_Form(req.POST)
@@ -88,7 +88,7 @@ def profile(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect('profile')
+            return redirect(req.path_info)
 
     # posts The users post
     posts = Post.objects.filter(user=req.user)
@@ -212,7 +212,7 @@ def post_edit(req, post_id):
         edit_form = Post_Form(req.POST, instance=post)
         if edit_form.is_valid():
             edit_form.save()
-            return redirect(req.get_full_path())
+            return redirect(req.path_info)
 
     edit_form = Post_Form(instance=post)
     context = {'edit_form': edit_form, 'post': post}
@@ -244,7 +244,7 @@ def city(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect(req.get_full_path())
+            return redirect(req.path)
 
     context = {'city': city, 'posts': posts}
     return render(req, 'cities/index.html', context)
@@ -259,7 +259,7 @@ def city_detail(req, slug):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect(req.get_full_path())
+            return redirect(req.path_info)
     cities = City.objects.all()
     inner_qs = City.objects.filter(name__contains=slug)
     posts = Post.objects.filter(city__in=inner_qs)

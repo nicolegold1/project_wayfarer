@@ -30,6 +30,10 @@ a {
   border: 1px solid var(--fourth-color) !important;
 }
 
+.city_title {
+  color: var(--main-color);
+}
+
 .cardCityImage {
   margin: 2%;
   padding: 4%;
@@ -89,7 +93,7 @@ a {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: var(--main-color);
+  background-color: var(--fourth-color);
   background-clip: border-box;
   border: 1px solid var(--third-color) !important;
   border-radius: 0.25rem !important;

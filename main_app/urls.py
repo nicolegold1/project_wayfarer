@@ -8,16 +8,16 @@ urlpatterns = [
     # profile routes
     path('profile/', views.profile, name='profile'),
     path('profile/<int:profile_id>/', views.profile_detail, name='profile_detail'),
-    path('cities/<int:profile_id>/<int:city_id>/',
+    path('profile/<int:profile_id>/<int:city_id>/',
          views.profile_show, name='profile_show'),
     path('profile/<int:profile_id>/edit/',
          views.profile_edit, name='profile_edit'),
     # city Routes
-    path('city/', views.city, name='city_index'),
-    path('city/<int:city_id>/', views.city_detail, name='city_detail'),
-    path('city/<int:city_id>/edit/', views.city_edit, name='city_edit'),
-    # Post Routes
+    path('cities/', views.city, name='city_index'),
+    path('cities/<int:city_id>/', views.city_detail, name='city_detail'),
+    path('cities/<int:city_id>/edit/', views.city_edit, name='city_edit'),
     # path('city/<int:city_id>/delete', views.city_delete, name='city_delete'),
+    # Post Routes
     # path('post/', views.posts_index, name='posts_index'),
     path('posts/', views.posts, name='all_posts'),
     path('posts/<int:post_id>/', views.post, name='posts_detail'),

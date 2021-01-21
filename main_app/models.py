@@ -31,8 +31,8 @@ class City(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=20)
-    description = models.TextField(max_length=100)
+    title = models.CharField(max_length=200)
+    description = models.TextField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)

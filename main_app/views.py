@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.db.models import signals
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 from .models import City, Profile, Post
@@ -119,7 +119,7 @@ def profile_show(req, profile_id, city_id):
             new_post = form.save(commit=False)
             new_post.user = req.user
             new_post.save()
-            return redirect('profile')
+            return redirect(req.get_full_path())
 
     if req.method == 'POST':
         city_form = City_Form(req.POST)
@@ -127,7 +127,7 @@ def profile_show(req, profile_id, city_id):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect('profile')
+            return redirect(req.get_full_path())
 
     city = City.objects.get(id=city_id)
     # posts The users post
@@ -212,7 +212,7 @@ def post_edit(req, post_id):
         edit_form = Post_Form(req.POST, instance=post)
         if edit_form.is_valid():
             edit_form.save()
-            return redirect('profile')
+            return redirect(req.get_full_path())
 
     edit_form = Post_Form(instance=post)
     context = {'edit_form': edit_form, 'post': post}
@@ -244,7 +244,7 @@ def city(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect('profile')
+            return redirect(req.get_full_path())
 
     context = {'city': city, 'posts': posts}
     return render(req, 'cities/index.html', context)
@@ -259,7 +259,7 @@ def city_detail(req, slug):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect('city_index')
+            return redirect(req.get_full_path())
     cities = City.objects.all()
     inner_qs = City.objects.filter(name__contains=slug)
     posts = Post.objects.filter(city__in=inner_qs)
@@ -276,13 +276,13 @@ def city_detail(req, slug):
 
 
 @login_required
-def city_edit(req, city_id):
-    city = City.objects.get(id=city_id)
+def city_edit(req, slug):
+    city = City.objects.get(name=slug)
     if req.method == 'POST':
         city_form = City_Form(req.POST, instance=city)
         if city_form.is_valid():
             city_form.save()
-            return redirect('city_detail', city_id=city.id)
+            return redirect('city_detail', city)
 
     city_form = City_Form(instance=city)
     context = {'city_form': city_form, 'city': city}

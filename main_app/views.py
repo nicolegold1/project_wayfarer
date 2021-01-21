@@ -199,7 +199,9 @@ def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     post_form = Profile_Form(instance=post)
     edit_form = Post_Form(instance=post)
-    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form}
+    cities = City.objects.all()
+    context = {'post': post, 'post_form': post_form,
+               'edit_form': edit_form, 'cities': cities}
     return render(request, 'post.html', context)
 
 
@@ -257,17 +259,18 @@ def city_detail(req, slug):
             new_city.user = req.user
             new_city.save()
             return redirect('city_index')
+    cities = City.objects.all()
     inner_qs = City.objects.filter(name__contains=slug)
     posts = Post.objects.filter(city__in=inner_qs)
     post_form = Post_Form()
     city = City.objects.get(name=slug)
     city_form = City_Form()
     # posts of the city
-    #posts = Post.objects.filter(city.pk=slug)
+    # posts = Post.objects.filter(city.pk=slug)
     # profile
     profile = Profile.objects.all()
     context = {'city': city, 'city_form': city_form,
-               'post_form': post_form, 'posts': posts, 'profile': profile}
+               'post_form': post_form, 'posts': posts, 'profile': profile, 'cities': cities}
     return render(req, 'cities/detail.html', context)
 
 

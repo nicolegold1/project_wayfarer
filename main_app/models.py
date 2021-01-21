@@ -1,10 +1,9 @@
-
-from django.contrib.auth import get_user
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.template.defaultfilters import slugify
 # Create your models here.
 from account.models import Account
 from django.urls import reverse
@@ -39,7 +38,7 @@ class City(models.Model):
 
     def save(self, *args, **kwargs):
         value = self.name
-        self.slug = slugify(value, allow_unicode=True)
+        self.slug = slugify(value)
         super().save(*args, **kwargs)
 
     def __str__(self):

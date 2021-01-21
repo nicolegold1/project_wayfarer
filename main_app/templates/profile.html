@@ -5,8 +5,7 @@
   integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
   crossorigin="anonymous"
 />
-{% endblock %} {% block modalMainPage %} {% comment %} Edit Profile {%
-endcomment %}
+{% endblock %} {% comment %} {% block modalMainPage %} {% endcomment %}
 <div
   class="modal fade"
   id="profileModal"
@@ -99,10 +98,8 @@ endcomment %}
     </div>
   </div>
 </div>
-{% comment %} end of modal body {% endcomment %} {% comment %} Post Select Model
-{% endcomment %}
+{% comment %} end of modal body {% endcomment %}
 <!-- Post Select Modal -->
-{% comment %}
 <div
   class="modal fade"
   id="postSelectModal"
@@ -110,7 +107,6 @@ endcomment %}
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  {% endcomment %} {% comment %}
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -140,9 +136,7 @@ endcomment %}
                 <p class="card-text">{{ post.description }}</p>
 
                 <div class="row">
-                  {% comment %}
                   <div class="modal-footer">
-                    {% endcomment %} {% comment %}
                     <div class="col-4 postCol">
                       <a
                         href="{% url 'all_posts' %}"
@@ -179,14 +173,9 @@ endcomment %}
                 </div>
               </div>
             </div>
-            {% endcomment %} {% comment %} start of app body {% endcomment %}
-            <p></p>
-            {% endblock %}
-            <p></p>
-            {% block content %}
+            {% comment %} {% endblock %} {% endcomment %} {% block content %}
             <div class="profilePageContainer">
               <div class="row">
-                {% comment %} List item Column {% endcomment %}
                 <div class="col-4 cityListRow">
                   <!-- Button trigger modal for Add A City-->
                   <h1 class="city_title_dark">
@@ -201,7 +190,6 @@ endcomment %}
                       Add A City
                     </button>
                   </h1>
-                  {% comment %} Add new City button {% endcomment %}
                   <!-- Modal -->
                   <div class="modal fade" id="addNewCity" tabindex="-1">
                     <div class="modal-dialog">
@@ -249,41 +237,8 @@ endcomment %}
                       </div>
                     </div>
                   </div>
-
-                  {% comment %} Cities content + posts {% endcomment %}
                   <section class="overflow-auto cityScroll">
-                    {% for city in cities %} {% comment %} {% if
-                    forloop.counter|divisibleby:2 %} {% endcomment %}
-                    <p></p>
-                    {% comment %}
-                    <div class="card mb-3" style="max-width: 540px">
-                      <a
-                        class="list-group-item list-group-item-action"
-                        href="{% url 'city_detail' city.id %}"
-                      >
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                            <img
-                              class="cityListImage"
-                              src="{{city.flags}}"
-                              alt="..."
-                            />
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h5 class="card-title">{{ city.name }}</h5>
-                              <p class="card-text">{{ city.description }}</p>
-                              <p class="card-text">
-                                <small class="text-muted"
-                                  >Last updated 3 mins ago</small
-                                >
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                    {% endcomment %} {% comment %} {% else %} {% endcomment %}
+                    {% for city in cities %}
                     <div
                       class="card mb-3 profile-city-list"
                       style="max-width: 540px"
@@ -308,9 +263,8 @@ endcomment %}
                         </div>
                       </a>
                     </div>
-                    {% comment %} {% endif %} {% endcomment %} {% endfor %}
+                    {% endfor %}
                   </section>
-                  {% comment %} end col {% endcomment %}
                 </div>
 
                 {% comment %} Selected city Column {% endcomment %}
@@ -323,16 +277,16 @@ endcomment %}
                 >
                   <div class="selected_city">
                     <div class="row">
-                      {% comment %} added id = listitem eventuallythat will
-                      allow to open seperate city {% endcomment %}
                       <div class="col-6" id="list-item-1">
-                        <div class="cityname">
-                          {% if profile.city.name|length <= 0 %}
-                          <h1>Tell Us Your Favorite City!</h1>
-                          {% else %}
-                          <h1>{{profile.city}}</h1>
-                          {% endif %}
-                        </div>
+                        <a href="{% url 'city_detail' profile.city  %}">
+                          <div class="cityname">
+                            {% if profile.city.name|length <= 0 %}
+                            <h1>Tell Us Your Favorite City!</h1>
+                            {% else %}
+                            <h1>{{profile.city}}</h1>
+                            {% endif %}
+                          </div>
+                        </a>
                       </div>
                       <div class="col-6">
                         <div class="user_information">
@@ -465,7 +419,6 @@ endcomment %}
                     </div>
                   </div>
                 </div>
-
                 {% comment %} end col {% endcomment %}
               </div>
             </div>

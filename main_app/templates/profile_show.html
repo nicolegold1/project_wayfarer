@@ -207,29 +207,6 @@
             </div>
           </div>
 
-{% comment %} SECTION: Updated City NavBar Left Vertical {% endcomment %}
-
-{% comment %} the buttons themselves {% endcomment %}
- {% comment %} <div class="d-flex align-items-start">
-  <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-    <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-    <a class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-    <a class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-    <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-  </div> {% endcomment %}
-
-  {% comment %} these are targets of buttons {% endcomment %}
- {% comment %}  <div class="tab-content" id="v-pills-tabContent">
-    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" >Hello</div>
-    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" >No</div>
-    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" >Yes</div>
-    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" > </div>
-  </div>
-</div> {% endcomment %}
-
-
-
-{% comment %} END OF CITY UPDATE {% endcomment %}
       {% comment %} Cities content + posts {% endcomment %}
       <section class="overflow-auto cityScroll">
         {% for city in cities %} 
@@ -254,7 +231,7 @@
         </div> {% endcomment %}
         {% comment %} {% else %} {% endcomment %}
         <div class="card mb-3 profile-city-list" style="max-width: 540px">
-          <a class="list-group-item list-group-item-action" href="{% url 'profile_show' profile.id city.id %}">
+          <a class="list-group-item list-group-item-action" href="{% url 'profile_show' profile.id city.id  %}">
             <div class="row g-0">
               <div class="col-md-8">
                 <div class="card-body">
@@ -287,10 +264,10 @@
           seperate city {% endcomment %}
           <div class="col-6" id="list-item-1">
             <div class="cityname">
-            {% if profile.city.name|length <= 0 %}
+            {% if city.name|length <= 0 %}
                <h1> Tell Us Your Favorite City! </h1>
             {% else %}
-             <h1> {{profile.city}}</h1>
+             <h1> {{city.name}}</h1>
             {% endif %}
             </div>
           </div>
@@ -343,6 +320,7 @@
           </div>
         <div class="posts overflow-auto" id="posts">
           <div></div>
+          {% comment %} {% if profile.post.city.id==city.id %} {% endcomment %}
           {% for post in posts %}
 
         <a class="cardATag" href="{% url 'posts_detail' post.id %}">
@@ -397,7 +375,9 @@
             </div>
             {% endif %}
           </a>
+       
           {% endfor %}
+          {% comment %} {% endif %} {% endcomment %}
         </div>
       </div>
     </div>

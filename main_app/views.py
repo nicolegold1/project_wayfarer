@@ -44,7 +44,7 @@ def homepage(request):
                     email_body,
                     from_email,
                     to_list,
-                    fail_silently=False,
+                    fail_silently=True,
                 )
                 return redirect('profile')
             else:

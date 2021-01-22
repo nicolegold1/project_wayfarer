@@ -1,10 +1,5 @@
 {% extends 'base.html' %} {% block scripts %}
-<link
-        rel="stylesheet"
-        href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-        crossorigin="anonymous"
-/>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 {% comment %} Edit Profile {% endcomment %}
 <div
         class="modal fade"
@@ -264,11 +259,11 @@
                       {% comment %} added id = listitem eventuallythat will allow to open
                       seperate city {% endcomment %}
                       <div class="col-6" id="list-item-1">
-                        <a class ="mainPageATag" href="{% url 'city_detail' profile.city %}">
                           <div class="cityname">
                             {% if profile.city.name|length <= 0 %}
                             <h1> Tell Us Your Favorite City! </h1>
                             {% else %}
+                        <a class ="mainPageATag" href="{% url 'city_detail' profile.city %}">
                             <h1> {{profile.city.name}}</h1>
                             <h3>{{profile.city.description}}</h3>
                             {% endif %}
@@ -312,7 +307,7 @@
                     </div>
                     <div class="row profilePost">
                       <div class="col-6 yourPostTitle">
-                        <h1>Your Posts</h1>
+                        <h1 class="whiteTitle">Your Posts</h1>
                       </div>
                       <div class="col-6">
                         {% comment %} button {% endcomment %}

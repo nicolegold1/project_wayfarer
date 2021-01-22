@@ -112,7 +112,7 @@
 
 
 
- <h1 class="city_title_dark"style="    margin-bottom: 0px;
+ <h2 class="city_title_dark"style="    margin-bottom: 0px;
     line-height: 1.75;">&nbsp;&nbsp; Your Cities
                     <button
                       style="justify-content: end; float: right; margin: 3%"
@@ -123,7 +123,7 @@
                     >
                       Add A City
                     </button>
-                  </h1>
+                  </h2>
                   <!-- Modal -->
                   <div class="modal fade" id="addNewCity" tabindex="-1">
                     <div class="modal-dialog">
@@ -139,7 +139,7 @@
                           ></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{% url 'city_index' %}" method="POST">
+                          <form action="{% url 'city_detail' city.name %}" method="POST">
                             <div class="titleDiv form-group"></div>
                             {% csrf_token %} {{ city_form.as_p }}
                             <div
@@ -179,7 +179,7 @@
                     >
                       <a
                         class="list-group-item list-group-item-action"
-                        href="{% url 'city_detail' city  %}"
+                        href="{% url 'city_detail' city.name  %}"
                       >
                         <div class="row g-0">
                           <div class="col-md-8">

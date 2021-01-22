@@ -212,11 +212,7 @@ def post_edit(req, post_id):
         edit_form = Post_Form(req.POST, instance=post)
         if edit_form.is_valid():
             edit_form.save()
-<<<<<<< HEAD
-            return HttpResponseRedirect(req.get_full_path())
-=======
             return redirect(req.get_full_path())
->>>>>>> upstream/Sean
 
     edit_form = Post_Form(instance=post)
     context = {'edit_form': edit_form, 'post': post}
@@ -247,11 +243,7 @@ def city(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-<<<<<<< HEAD
-            return HttpResponseRedirect(req.get_full_path())
-=======
             return redirect(req.get_full_path())
->>>>>>> upstream/Sean
 
     context = {'city': city, 'posts': posts}
     return render(req, 'cities/index.html', context)
@@ -266,11 +258,7 @@ def city_detail(req, slug):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-<<<<<<< HEAD
-            return HttpResponseRedirect(req.get_full_path())
-=======
             return redirect(req.get_full_path())
->>>>>>> upstream/Sean
     cities = City.objects.all()
     inner_qs = City.objects.filter(name__contains=slug)
     posts = Post.objects.filter(city__in=inner_qs)
@@ -286,15 +274,9 @@ def city_detail(req, slug):
     return render(req, 'cities/detail.html', context)
 
 
-<<<<<<< HEAD
-@login_required(login_url='/profile/')
-def city_edit(req, city_id):
-    city = City.objects.get(id=city_id)
-=======
 @login_required
 def city_edit(req, slug):
     city = City.objects.get(name=slug)
->>>>>>> upstream/Sean
     if req.method == 'POST':
         city_form = City_Form(req.POST, instance=city)
         if city_form.is_valid():

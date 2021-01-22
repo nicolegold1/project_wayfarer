@@ -7,7 +7,7 @@
 /* Post All */
 @import "./components/postsAll.css";
 
-/* all */ 
+/* all */
 :root {
   --main-color: #f4f7ed;
   --secondary-color: #86ee60;
@@ -80,7 +80,12 @@ html body {
 
 .postShowContent {
   text-align: center;
-}    
+}
+
+.btn-primary {
+  color: var(--main-color) !important;
+  background-color: var(--fourth-color) !important;
+}
 
 /* COLOR SCHEME */
 /* Dark Blue: #2b3752 */

@@ -15,6 +15,15 @@
   --fourth-color: #2b3752;
 }
 
+* {
+  font-family: "lato", sans-serif !important;
+  font-weight: 700 !important;
+}
+
+p {
+  font-weight: 400 !important;
+}
+
 html body {
   background-color: #f4f7ed;
 }
@@ -84,11 +93,23 @@ html body {
 
 .btn-primary {
   color: var(--main-color) !important;
+  border-color: var(--secondary-color) !important;
   background-color: var(--fourth-color) !important;
 }
 
-/* COLOR SCHEME */
-/* Dark Blue: #2b3752 */
-/* Light Blue/Greenish: #2e6e65 */
-/* Green: #86ee60 */
-/* Light Grey/Off White: #f4f7ed */
+.btn-primary:hover {
+  color: var(--main-color) !important;
+  border-color: var(--secondary-color) !important;
+  background-color: var(--bs-blue) !important;
+}
+
+.city-btn {
+  border-color: var(--secondary-color) !important;
+  border: 2px solid;
+}
+
+#cityListRow {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}

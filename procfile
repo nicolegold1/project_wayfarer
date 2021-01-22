@@ -1,1 +1,1 @@
-gunicorn project_wayfarer.wsgi
+web: gunicorn project_wayfarer.wsgi

@@ -23,7 +23,7 @@ from django.urls import reverse
 
 class City(models.Model):
     name = models.CharField(max_length=20, unique=True)
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=300)
     flags = models.CharField(verbose_name='Image(Url):', max_length=200)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     """ posts = models.ManyToManyField(Post, blank=True)  """

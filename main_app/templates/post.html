@@ -74,6 +74,8 @@
     </div>
   </div>
 </div>
+</div>
+</div>
 {% comment %} end of modal body {% endcomment %}
 
 <div class="postCard">
@@ -86,8 +88,15 @@
       <p>Author: {{ post.user.username }}</p>
       <p class="card-text">{{ post.description }}</p>
 
+
+
+
+
+
+
+
       <div class="row">
-      {% comment %} <div class="modal-footer"> {% endcomment %}
+
         <div class="col-4 postCol">
           <a
                   href="{% url 'all_posts' %}"

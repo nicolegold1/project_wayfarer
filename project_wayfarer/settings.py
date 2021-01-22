@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from .email_info import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_USE_TLS, EMAIL_HOST_PASSWORD
+import django_on_heroku
 from pathlib import Path
 import os
 
@@ -139,3 +140,5 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'account.Account'
+
+django_on_heroku.settings(locals())

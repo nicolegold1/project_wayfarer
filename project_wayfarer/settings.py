@@ -19,12 +19,6 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'projectwayfarersei@gmail.com'
-EMAIL_HOST_PASSWORD = 'Prometheus2021'
-EMAIL_USE_TLS = True
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 

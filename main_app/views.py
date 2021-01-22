@@ -191,7 +191,9 @@ def post(req, post_id):
     #     username_form = request.POST['username']
     post_form = Profile_Form(instance=post)
     edit_form = Post_Form(instance=post)
-    context = {'post': post, 'post_form': post_form, 'edit_form': edit_form, }
+    city_form = City_Form()
+    context = {'post': post, 'post_form': post_form,
+               'edit_form': edit_form, 'city_form': city_form}
     return render(req, 'post.html', context)
 
 
@@ -223,9 +225,11 @@ def post_edit(req, post_id):
 @login_required(login_url='/profile/')
 def posts(req):
     posts = Post.objects.all()
+    city_form = City_Form()
     cities = City.objects.filter(user=req.user)
     profile = Profile.objects.get(user=req.user)
-    context = {'posts': posts, 'cities': cities, 'profile': profile}
+    context = {'posts': posts, 'cities': cities,
+               'profile': profile, 'city_form': city_form}
     return render(req, 'posts.html', context)
 
 
@@ -234,6 +238,7 @@ def post_delete(req, post_id):
     return redirect('all_posts')
 
 # ===========================City pages ==========================
+
 
 @login_required(login_url='/profile/')
 def city(req):
@@ -244,10 +249,11 @@ def city(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect(req.get_full_path())
+            return redirect('profile')
 
     context = {'city': city, 'posts': posts}
-    return render(req, 'cities/index.html', context)
+    return redirect('profile')
+    # return render(req, 'cities/index.html', context)
 
 
 @login_required(login_url='/profile/')

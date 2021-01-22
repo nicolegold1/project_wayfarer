@@ -79,7 +79,7 @@
       <div class="modal-body">
         <div class="profilePageContainer">
           <div class="card mb-3" id="postCard" style="max-width: 540px">
-            <form action="{% url 'city_edit' city.id %}" method="POST">
+            <form action="{% url 'city_edit' city %}" method="POST">
               <div class="titleDiv form-group"></div>
               {% csrf_token %} {{ city_form.as_p }}
               <div class="modal-footer" style="justify-content: center">
@@ -112,8 +112,8 @@
 
 
 
- <h1 class="city_title_dark">
-                    Cities
+ <h1 class="city_title_dark"style="    margin-bottom: 0px;
+    line-height: 1.75;">&nbsp;&nbsp; Your Cities
                     <button
                       style="justify-content: end; float: right; margin: 3%"
                       type="button"
@@ -247,7 +247,7 @@
 
 {% comment %} {% for post in posts %}
 <p>Hello {{post.title}}</p> {% endcomment %}
-<h1 style="text-align: center;">Posts</h1>
+<h1 style="text-align: center;">All Posts</h1>
 
 <section class="containerDetail container-fluid">
 <div class="posts overflow-auto" id="posts">

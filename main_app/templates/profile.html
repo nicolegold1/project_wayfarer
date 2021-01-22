@@ -264,11 +264,11 @@
                       {% comment %} added id = listitem eventuallythat will allow to open
                       seperate city {% endcomment %}
                       <div class="col-6" id="list-item-1">
-                        <a class ="mainPageATag" href="{% url 'city_detail' profile.city %}">
                           <div class="cityname">
                             {% if profile.city.name|length <= 0 %}
                             <h1> Tell Us Your Favorite City! </h1>
                             {% else %}
+                        <a class ="mainPageATag" href="{% url 'city_detail' profile.city %}">
                             <h1> {{profile.city.name}}</h1>
                             <h3>{{profile.city.description}}</h3>
                             {% endif %}

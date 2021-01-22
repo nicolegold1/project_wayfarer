@@ -63,7 +63,7 @@ class Post(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(Account, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
     username = models.CharField(max_length=30, unique=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)

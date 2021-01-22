@@ -226,7 +226,7 @@ def post_edit(req, post_id):
 def posts(req):
     posts = Post.objects.all()
     city_form = City_Form()
-    cities = City.objects.filter(user=req.user)
+    cities = City.objects.filter()
     profile = Profile.objects.get(user=req.user)
     context = {'posts': posts, 'cities': cities,
                'profile': profile, 'city_form': city_form}

@@ -45,6 +45,7 @@ class SignUpForm(UserCreationForm):
     last_name = forms.CharField(max_length=20, widget=forms.TextInput(
         attrs={'class': 'form-control'}))
 
+
     class Meta:
         model = Account
         fields = ['username', 'first_name', 'last_name',
@@ -56,12 +57,12 @@ class SignUpForm(UserCreationForm):
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
+   
 
 class Post_Form(ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'description', 'city']
-
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),

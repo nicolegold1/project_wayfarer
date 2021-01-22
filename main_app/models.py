@@ -6,6 +6,8 @@ from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 # Create your models here.
 from account.models import Account
+# modify the urls/ slugs
+from django.template.defaultfilters import slugify
 from django.urls import reverse
 
 

@@ -34,18 +34,18 @@ def homepage(request):
             if add_form.is_valid():
                 user = add_form.save()
                 login(request, user)
-                email_subject = "Welcome to Wayfarer"
-                email_body = "You have successfully signed up for an account!"
-                from_email = settings.EMAIL_HOST_USER
-                new_user_email = user.email
-                to_list = [new_user_email]
-                send_mail(
-                    email_subject,
-                    email_body,
-                    from_email,
-                    to_list,
-                    fail_silently=False,
-                )
+                #email_subject = "Welcome to Wayfarer"
+                #email_body = "You have successfully signed up for an account!"
+                #from_email = settings.EMAIL_HOST_USER
+                #new_user_email = user.email
+                #to_list = [new_user_email]
+                #send_mail(
+                #    email_subject,
+                #    email_body,
+                #   from_email,
+                #    to_list,
+                #    fail_silently=False,
+                #)
                 return redirect('profile')
             else:
                 error_message = "Invalid Sign Up - Please Try Again"
@@ -70,7 +70,7 @@ def logout(request):
 
 # ===================== Profile =========================
 
-@login_required
+@login_required(login_url='/profile/')
 def profile(req):
     # user = User.objects.get(user_id=req.user_id)
     # user.save()
@@ -80,7 +80,7 @@ def profile(req):
             new_post = form.save(commit=False)
             new_post.user = req.user
             new_post.save()
-            return redirect(req.path_info)
+            return redirect('profile')
 
     if req.method == 'POST':
         city_form = City_Form(req.POST)
@@ -88,7 +88,7 @@ def profile(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect(req.path_info)
+            return redirect('profile')
 
     # posts The users post
     posts = Post.objects.filter(user=req.user)
@@ -152,7 +152,7 @@ def profile_show(req, profile_id, city_id):
     return render(req, 'profile_show.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def profile_detail(req, profile_id):
     user = Profile.objects.get(id=profile_id)
     if req.method == 'POST':
@@ -165,7 +165,7 @@ def profile_detail(req, profile_id):
     return render(req, 'profile_detail.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def profile_edit(req, profile_id):
     profile = Profile.objects.get(id=profile_id)
     if req.method == 'POST':
@@ -181,7 +181,7 @@ def profile_edit(req, profile_id):
 
 # ===========================Posts pages ==========================
 
-@login_required
+@login_required(login_url='/profile/')
 def post(req, post_id):
     post = Post.objects.get(id=post_id)
     # if request.method == "POST":
@@ -194,7 +194,7 @@ def post(req, post_id):
     return render(req, 'post.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     post_form = Profile_Form(instance=post)
@@ -205,21 +205,21 @@ def posts_detail(request, post_id):
     return render(request, 'post.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def post_edit(req, post_id):
     post = Post.objects.get(id=post_id)
     if req.method == 'POST':
         edit_form = Post_Form(req.POST, instance=post)
         if edit_form.is_valid():
             edit_form.save()
-            return redirect(req.path_info)
+            return redirect(req.get_full_path())
 
     edit_form = Post_Form(instance=post)
     context = {'edit_form': edit_form, 'post': post}
     return render(req, 'post.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def posts(req):
     posts = Post.objects.all()
     cities = City.objects.filter(user=req.user)
@@ -234,8 +234,7 @@ def post_delete(req, post_id):
 
 # ===========================City pages ==========================
 
-
-@login_required
+@login_required(login_url='/profile/')
 def city(req):
     # create
     if req.method == 'POST':
@@ -244,13 +243,13 @@ def city(req):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect(req.path)
+            return redirect(req.get_full_path())
 
     context = {'city': city, 'posts': posts}
     return render(req, 'cities/index.html', context)
 
 
-@login_required
+@login_required(login_url='/profile/')
 def city_detail(req, slug):
     # create
     if req.method == 'POST':
@@ -259,7 +258,7 @@ def city_detail(req, slug):
             new_city = city_form.save(commit=False)
             new_city.user = req.user
             new_city.save()
-            return redirect(req.path_info)
+            return redirect(req.get_full_path())
     cities = City.objects.all()
     inner_qs = City.objects.filter(name__contains=slug)
     posts = Post.objects.filter(city__in=inner_qs)
